@@ -1,0 +1,811 @@
+<title>Argelès, Nouvel An 2027</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Carnet de voyage, mobile d'abord. Palette « chaux et vermeil » : murs chaulés de Collioure, rouge vermeil, bleu de la Méditerranée l'hiver, chêne-liège des Albères ; la nuit du réveillon en bandeau. */
+:root{
+  --paper:#EDEFEC; --surface:#FAFBF8; --ink:#16223A; --ink-2:#536079; --rule:#D3D9D4; --tint:#E2E7E2;
+  --accent:#B5372A; --accent-ink:#FFFFFF; --accent-soft:#F3DCD7;
+  --sea:#1C6888; --cork:#56662A; --gold:#8F6200; --violet:#6A3D8F;
+  --ok:#2C7A4A; --todo:#A4560F; --opt:#5A6880; --ask:#6A3D8F;
+  --night:#0D1630; --night-2:#1A2752; --night-ink:#EEF1FA; --night-mute:#AEB7D3;
+  --f-display:"Young Serif", Georgia, "Times New Roman", serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"DM Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --nav-h:50px; --radius:10px; --maxw:1080px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0F1626; --surface:#172036; --ink:#E8ECF4; --ink-2:#A7B0C6; --rule:#2A3550; --tint:#1D2842;
+  --accent:#F07B63; --accent-ink:#2A0E08; --accent-soft:#4A231C;
+  --sea:#62B8D8; --cork:#AFC174; --gold:#E6B64C; --violet:#B99BE0;
+  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC6; --ask:#B99BE0; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --paper:#0F1626; --surface:#172036; --ink:#E8ECF4; --ink-2:#A7B0C6; --rule:#2A3550; --tint:#1D2842;
+  --accent:#F07B63; --accent-ink:#2A0E08; --accent-soft:#4A231C;
+  --sea:#62B8D8; --cork:#AFC174; --gold:#E6B64C; --violet:#B99BE0;
+  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC6; --ask:#B99BE0; color-scheme:dark; }
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-padding-top:calc(var(--nav-h) + 14px); scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:1.03rem; line-height:1.55; overflow-x:hidden}
+a{color:var(--accent); text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+h1,h2,h3{font-family:var(--f-display); font-weight:400; line-height:1.15; margin:0; text-wrap:balance}
+p{margin:0 0 .7em}
+.wrap{max-width:var(--maxw); margin:0 auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.mono{font-family:var(--f-mono); font-size:.86em}
+.muted{color:var(--ink-2)}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:10; background:var(--night)}
+
+/* Bandeau de nuit */
+.hero{background:radial-gradient(120% 90% at 70% 0%, var(--night-2) 0%, var(--night) 62%); color:var(--night-ink); position:relative; overflow:hidden}
+.hero canvas{position:absolute; inset:0; width:100%; height:100%; display:block; pointer-events:none}
+.hero .wrap{position:relative; padding-block:56px 30px; display:grid; gap:18px}
+.eyebrow{font-family:var(--f-mono); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--night-mute)}
+.hero h1{font-size:clamp(2.4rem, 9vw, 4.6rem); letter-spacing:-.01em}
+.hero h1 em{font-style:normal; color:#F2A28F; white-space:nowrap}
+.hero .lede{max-width:52ch; color:var(--night-mute); font-size:1.08rem; margin:0}
+.countrow{display:flex; flex-wrap:wrap; gap:10px 26px; align-items:flex-end; margin-top:6px}
+.count{display:grid; gap:2px}
+.count .n{font-family:var(--f-display); font-size:2.6rem; line-height:1; color:#F6D07A; font-variant-numeric:tabular-nums}
+.count .l{font-family:var(--f-mono); font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:var(--night-mute)}
+.crew{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+.crew span{border:1px solid rgba(238,241,250,.25); border-radius:999px; padding:3px 12px; font-size:.92rem}
+.horizon{display:block; width:100%; height:54px; position:relative}
+.horizon path{fill:var(--paper)}
+
+/* Navigation */
+.nav{position:sticky; top:env(safe-area-inset-top, 0px); z-index:900; background:var(--surface); border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex; align-items:center; gap:4px; height:var(--nav-h); overflow-x:auto; scrollbar-width:none}
+.nav .wrap::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap; text-decoration:none; color:var(--ink-2); font-size:.93rem; padding:6px 10px; border-radius:6px}
+.nav a:hover{color:var(--ink); background:var(--tint)}
+.nav .sp{flex:1}
+.themebtn{border:1px solid var(--rule); background:transparent; color:var(--ink-2); border-radius:6px; padding:5px 10px; font:inherit; font-size:.85rem; cursor:pointer; white-space:nowrap}
+
+/* Sections */
+section{padding-block:44px 8px}
+.sec-h{display:grid; gap:6px; margin-bottom:20px}
+.sec-h h2{font-size:clamp(1.7rem, 5vw, 2.3rem)}
+.sec-h p{max-width:62ch; color:var(--ink-2); margin:0}
+.note{font-size:.9rem; color:var(--ink-2); border-left:3px solid var(--gold); padding:4px 0 4px 12px; margin:14px 0 0; max-width:70ch}
+
+/* Maison */
+.house{display:grid; grid-template-columns:1.2fr 1fr; gap:18px}
+@media (max-width:760px){ .house{grid-template-columns:1fr} }
+.panel{background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); padding:18px; min-width:0}
+.panel h3{font-size:1.25rem; margin-bottom:8px}
+.facts{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; margin:10px 0 0}
+.facts dt{font-family:var(--f-mono); font-size:.8rem; color:var(--ink-2); padding-top:3px; text-transform:uppercase; letter-spacing:.05em}
+.facts dd{margin:0}
+.beds{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.bed{border:1px solid var(--rule); border-radius:6px; padding:6px 10px; display:grid; gap:0; background:var(--paper)}
+.bed b{font-family:var(--f-mono); font-weight:500; font-size:.95rem}
+.bed span{font-size:.82rem; color:var(--ink-2)}
+.pill{display:inline-flex; align-items:center; gap:6px; font-size:.8rem; font-weight:700; border-radius:999px; padding:2px 10px; border:1px solid currentColor; white-space:nowrap}
+.pill::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor}
+.pill.ok{color:var(--ok)} .pill.todo{color:var(--todo)} .pill.opt{color:var(--opt)} .pill.ask{color:var(--ask)}
+.backup{list-style:none; padding:0; margin:10px 0 0; display:grid; gap:8px}
+.backup li{display:flex; justify-content:space-between; gap:10px; align-items:baseline; border-top:1px solid var(--rule); padding-top:8px; flex-wrap:wrap}
+
+/* Programme */
+.days{display:grid; gap:14px}
+.day{background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); display:grid; grid-template-columns:132px 1fr; overflow:hidden}
+.day.opt{border-style:dashed}
+@media (max-width:640px){ .day{grid-template-columns:1fr} }
+.day .when{background:var(--tint); padding:16px; display:grid; align-content:start; gap:2px}
+.day .dow{font-family:var(--f-mono); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2)}
+.day .dnum{font-family:var(--f-display); font-size:2.3rem; line-height:1}
+.day .mon{font-size:.9rem; color:var(--ink-2)}
+.day.star .when{background:var(--night); color:var(--night-ink)}
+.day.star .dow,.day.star .mon{color:var(--night-mute)}
+.day.star .dnum{color:#F6D07A}
+@media (max-width:640px){ .day .when{grid-auto-flow:column; justify-content:start; align-items:baseline; gap:10px} .day .dnum{font-size:1.7rem} }
+.day .body{padding:16px 18px; min-width:0; display:grid; gap:10px}
+.day h3{font-size:1.3rem}
+.slots{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.slots li{display:grid; grid-template-columns:86px 1fr; gap:10px}
+@media (max-width:420px){ .slots li{grid-template-columns:1fr; gap:0} }
+.slots .t{font-family:var(--f-mono); font-size:.82rem; color:var(--accent); padding-top:2px; font-variant-numeric:tabular-nums}
+.slots .x{min-width:0}
+.warn{font-size:.88rem; color:var(--todo)}
+.dayfoot{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.chip{border:1px solid var(--rule); background:var(--paper); color:var(--ink); border-radius:999px; padding:4px 12px; font:inherit; font-size:.86rem; cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+
+/* Fêtes */
+.fest{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px}
+@media (max-width:760px){ .fest{grid-template-columns:1fr} }
+.big{background:var(--night); color:var(--night-ink); border-radius:var(--radius); padding:20px; display:grid; gap:10px; min-width:0}
+.big h3{font-size:1.5rem; color:#F6D07A}
+.big .k{font-family:var(--f-mono); font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color:var(--night-mute)}
+.big ol{list-style:none; margin:0; padding:0; display:grid; gap:6px}
+.big li{display:grid; grid-template-columns:62px 1fr; gap:8px}
+.big li b{font-family:var(--f-mono); font-weight:500; color:#F2A28F; font-variant-numeric:tabular-nums}
+.big p{color:var(--night-mute); margin:0}
+.everyday{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:14px}
+@media (max-width:760px){ .everyday{grid-template-columns:1fr} }
+.everyday .panel b{display:block; font-family:var(--f-mono); font-weight:500; color:var(--accent); font-size:.85rem; margin-bottom:2px}
+.tablebox{overflow-x:auto; margin-top:14px; border:1px solid var(--rule); border-radius:var(--radius); background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:520px; font-size:.94rem}
+th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--rule); vertical-align:top}
+th{font-family:var(--f-mono); font-weight:500; font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2)}
+tr:last-child td{border-bottom:0}
+td.d{font-family:var(--f-mono); white-space:nowrap; font-variant-numeric:tabular-nums}
+tr.us td{background:var(--accent-soft)}
+
+/* Escapades */
+.filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px}
+.trips{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px}
+@media (max-width:900px){ .trips{grid-template-columns:repeat(2, minmax(0,1fr))} }
+@media (max-width:580px){ .trips{grid-template-columns:1fr} }
+.trip{background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); padding:16px; display:grid; gap:8px; align-content:start; min-width:0}
+.trip header{display:flex; justify-content:space-between; gap:8px; align-items:baseline}
+.trip h3{font-size:1.18rem}
+.trip .dist{font-family:var(--f-mono); font-size:.8rem; color:var(--ink-2); white-space:nowrap}
+.trip p{margin:0; font-size:.95rem}
+.trip .hours{font-size:.86rem; color:var(--ink-2)}
+.trip .closed{font-size:.86rem; color:var(--todo)}
+.tags{display:flex; flex-wrap:wrap; gap:6px}
+.tag{font-size:.74rem; font-family:var(--f-mono); border-radius:4px; padding:1px 7px; background:var(--tint); color:var(--ink-2)}
+.trip a.more{font-size:.88rem}
+
+/* Carte */
+.mapgrid{display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:16px; align-items:start}
+@media (max-width:820px){ .mapgrid{grid-template-columns:1fr} }
+.mapbox{background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius); overflow:hidden}
+.mapbox svg{display:block; width:100%; height:auto}
+.m-sea{fill:color-mix(in srgb, var(--sea) 16%, var(--surface))}
+.m-land{fill:var(--paper); stroke:var(--sea); stroke-width:1.4}
+.m-border{fill:none; stroke:var(--ink-2); stroke-width:1; stroke-dasharray:5 4; opacity:.7}
+.m-river{fill:none; stroke:var(--sea); stroke-width:1.2; opacity:.55}
+.m-ridge{fill:none; stroke:var(--cork); stroke-width:6; stroke-linecap:round; opacity:.22}
+.m-lbl{font-family:var(--f-body); font-size:12px; fill:var(--ink)}
+.m-lbl.small{font-size:10.5px; fill:var(--ink-2)}
+.m-lbl.sea{font-family:var(--f-display); font-size:15px; fill:var(--sea); letter-spacing:.06em}
+.m-lbl.ctry{font-family:var(--f-mono); font-size:10px; fill:var(--ink-2); letter-spacing:.2em}
+.pin{cursor:pointer}
+.pin circle{fill:var(--surface); stroke:var(--ink); stroke-width:1.6; transition:r .15s}
+.pin.on circle{fill:var(--accent); stroke:var(--accent)}
+.pin.home circle{fill:var(--gold); stroke:var(--gold)}
+.pin:focus-visible circle{stroke:var(--accent); stroke-width:3}
+.mapside{display:grid; gap:12px}
+.place h3{font-size:1.2rem; margin-bottom:4px}
+.legend{display:flex; flex-wrap:wrap; gap:6px}
+
+/* Météo */
+.wxgrid{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px}
+@media (max-width:760px){ .wxgrid{grid-template-columns:repeat(2, minmax(0,1fr))} }
+.wx b{display:block; font-family:var(--f-display); font-size:1.8rem; font-weight:400; line-height:1.1; font-variant-numeric:tabular-nums}
+.wx span{font-size:.88rem; color:var(--ink-2)}
+#live{margin-top:14px}
+.fc{display:grid; grid-template-columns:repeat(auto-fill, minmax(118px,1fr)); gap:10px}
+.fc .panel{padding:12px}
+
+/* Préparer */
+.prep{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+@media (max-width:760px){ .prep{grid-template-columns:1fr} }
+.checks{list-style:none; padding:0; margin:0; display:grid; gap:2px}
+.checks h4{font-family:var(--f-mono); font-weight:500; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); margin:12px 0 4px}
+.checks label{display:flex; gap:10px; align-items:flex-start; padding:5px 0; cursor:pointer}
+.checks input{width:18px; height:18px; margin-top:3px; accent-color:var(--accent); flex:none}
+.checks input:checked + span{color:var(--ink-2); text-decoration:line-through}
+.progress{height:6px; border-radius:3px; background:var(--tint); overflow:hidden; margin:8px 0 4px}
+.progress i{display:block; height:100%; background:var(--ok); width:0; transition:width .25s}
+.resa{list-style:none; padding:0; margin:0; display:grid}
+.resa li{display:grid; grid-template-columns:1fr auto; gap:4px 12px; padding:10px 0; border-top:1px solid var(--rule); align-items:center}
+.resa li:first-child{border-top:0}
+.resa .w{min-width:0}
+.resa small{display:block; color:var(--ink-2)}
+.resa select{font:inherit; font-size:.86rem; border:1px solid var(--rule); background:var(--paper); color:var(--ink); border-radius:6px; padding:4px 6px}
+
+/* Pratique */
+.prat{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px}
+@media (max-width:820px){ .prat{grid-template-columns:1fr} }
+.prat ul{margin:0; padding-left:18px; display:grid; gap:4px}
+.num{font-family:var(--f-mono); font-size:1.05rem; font-variant-numeric:tabular-nums}
+
+footer{margin-top:44px; border-top:1px solid var(--rule); padding-block:20px 40px; color:var(--ink-2); font-size:.8rem}
+footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
+.bonany{font-family:var(--f-display); font-size:1.4rem; color:var(--accent); margin-bottom:10px}
+</style>
+<!--/head-->
+<header class="hero" id="top">
+  <canvas id="fw" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">Côte Vermeille · Saint-Sylvestre 2026</div>
+    <h1>Argelès,<br><em>Nouvel An</em> à cinq</h1>
+    <p class="lede">Une maison au pied du village, la mer à deux kilomètres, un poêle à bois pour les soirées et les Réveillons de la Plage pour fêter minuit. Carnet de route du séjour, du mardi 29 décembre au début janvier.</p>
+    <div class="countrow" id="countdown" aria-live="polite"></div>
+    <div class="crew" aria-label="Voyageurs"><span>Pauline</span><span>Sébastien</span><span>Jules</span><span>Hélia</span><span>Noé</span></div>
+  </div>
+  <svg class="horizon" viewBox="0 0 1200 54" preserveAspectRatio="none" aria-hidden="true"><path d="M0 54 L0 34 L70 30 L130 18 L190 26 L250 12 L300 20 L360 8 L420 22 L470 16 L540 28 L610 24 L680 34 L760 30 L860 38 L980 40 L1100 44 L1200 42 L1200 54 Z"/></svg>
+</header>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a href="#maison">Maison</a><a href="#programme">Programme</a><a href="#fetes">Fêtes</a><a href="#escapades">Escapades</a><a href="#carte">Carte</a><a href="#meteo">Météo</a><a href="#preparer">Préparer</a><a href="#pratique">Pratique</a>
+    <span class="sp"></span>
+    <button class="themebtn" id="themebtn" type="button">Thème</button>
+  </div>
+</nav>
+
+<main>
+<section id="maison" class="wrap">
+  <div class="sec-h">
+    <h2>La maison de Valérie</h2>
+    <p>Échange HomeExchange à Argelès-sur-Mer, au fond d'une impasse calme, à quelques minutes à pied du village.</p>
+  </div>
+  <div class="house">
+    <div class="panel">
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:center; flex-wrap:wrap">
+        <h3>Ce que l'on sait</h3><span class="pill ask" id="housestatus">Prolongation demandée</span>
+      </div>
+      <dl class="facts">
+        <dt>Dates</dt><dd>Disponible sur la période. Demande envoyée le 19 octobre pour 5 nuits : du 29 décembre au 3 janvier, ou du 28 décembre au 2 janvier, au choix de Valérie.</dd>
+        <dt>Minimum</dt><dd>4 nuits.</dd>
+        <dt>Chauffage</dt><dd>Climatisation réversible, et un poêle à bois pour les soirées au coin du feu.</dd>
+        <dt>Linge</dt><dd>À apporter : draps et serviettes pour tout le monde.</dd>
+        <dt>Accès</dt><dd>Village à pied (marchés, cinéma, médiathèque), plages à 2 km, mer accessible à vélo.</dd>
+        <dt>À vérifier</dt><dd>Nombre de salles de bain (question posée), bois pour le poêle, heure d'arrivée et remise des clés.</dd>
+      </dl>
+    </div>
+    <div class="panel">
+      <h3>Couchages</h3>
+      <div class="beds">
+        <div class="bed"><b>160</b><span>Pauline et Séb</span></div>
+        <div class="bed"><b>160</b><span>Hélia et Noé, ou un chacun</span></div>
+        <div class="bed"><b>140</b><span>Jules</span></div>
+        <div class="bed"><b>90</b><span>Appoint</span></div>
+        <div class="bed"><b>2 × 90</b><span>Matelas supplémentaires</span></div>
+      </div>
+      <h3 style="margin-top:18px">Solutions de repli</h3>
+      <ul class="backup">
+        <li><span><b>Katla</b>, Fitou (Aude)</span><span class="pill opt">Plan B</span></li>
+        <li><span><b>Marine et Rémy</b>, Pia</span><span class="pill opt">Plan C</span></li>
+      </ul>
+      <p class="muted" style="font-size:.88rem; margin-top:10px">Une fois l'échange confirmé par Valérie, prévenir les autres hôtes.</p>
+    </div>
+  </div>
+</section>
+
+<section id="programme" class="wrap">
+  <div class="sec-h">
+    <h2>Programme jour par jour</h2>
+    <p>Une proposition souple : une sortie par jour au plus, et les fêtes d'Argelès en fin d'après-midi. Les jours en pointillés dépendent de la réponse de Valérie.</p>
+  </div>
+  <div class="days" id="days"></div>
+  <p class="note">Les horaires des fêtes reprennent l'édition 2025-2026, la seule publiée à ce jour. Le programme 2026-2027 sort en général début décembre sur le site de la ville.</p>
+</section>
+
+<section id="fetes" class="wrap">
+  <div class="sec-h">
+    <h2>Les Réveillons de la Plage</h2>
+    <p>La ville d'Argelès organise chaque hiver « les Fêtes inouïes », un programme entièrement gratuit. Entre Noël et le début janvier, tout se passe sur l'esplanade Charles-Trenet, face à la mer, à Argelès-Plage.</p>
+  </div>
+  <div class="fest">
+    <article class="big">
+      <span class="k">Jeudi 31 décembre · esplanade Charles-Trenet</span>
+      <h3>Le réveillon en bord de mer</h3>
+      <ol>
+        <li><b>21h00</b><span>Ouverture de la piste de danse, DJ accordéoniste</span></li>
+        <li><b>22h00</b><span>Set électro festif années 80, 90 et 2000</span></li>
+        <li><b>00h00</b><span>Feu d'artifice au-dessus de la mer</span></li>
+        <li><b>00h–02h</b><span>DJ années 90 et 2000, saxophoniste toute la soirée</span></li>
+      </ol>
+      <p>Chalets gourmands ouverts jusqu'à 2 h. Programme de l'édition précédente, à confirmer.</p>
+    </article>
+    <article class="big">
+      <span class="k">Vendredi 1er janvier · plage centrale</span>
+      <h3>Le premier plouf de l'année</h3>
+      <ol>
+        <li><b>10h30</b><span>Rendez-vous des baigneurs, en maillot, en combinaison ou déguisés</span></li>
+        <li><b>10h45</b><span>Échauffement en musique et zumba</span></li>
+        <li><b>11h00</b><span>Départ du bain, sous la surveillance des sauveteurs locaux</span></li>
+        <li><b>12h00</b><span>Concert électro lounge sur la plage</span></li>
+        <li><b>21h00</b><span>Soirée DJ</span></li>
+      </ol>
+      <p>Diplôme, photo souvenir et collation pour les baigneurs. L'eau est autour de 13 à 14 °C.</p>
+    </article>
+  </div>
+  <div class="everyday">
+    <div class="panel"><b>12h – 24h</b>Chalets gourmands sur l'esplanade, tous les jours du 25 décembre au 3 janvier.</div>
+    <div class="panel"><b>15h – 19h</b>Animations gratuites pour les enfants : kart à voile (jusqu'au 30), balades à poney, jeux d'arcade, initiations sportives.</div>
+    <div class="panel"><b>20h</b>Un concert gratuit chaque soir : reprises pop-rock, chanson française, tubes des années 70 à aujourd'hui.</div>
+  </div>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Date</th><th>Après-midi (14h–17h)</th><th>Soir</th></tr></thead>
+      <tbody id="festtable"></tbody>
+    </table>
+  </div>
+  <p class="note">Les noms de groupes et les initiations changent chaque année ; le tableau montre le rythme de la dernière édition, recalé sur nos dates. Les lignes en couleur correspondent à nos jours sur place. Les Rois Mages défilent aussi sur les quais du port en clôture des fêtes, à dos de dromadaire, avec des friandises pour les enfants (date à vérifier).</p>
+</section>
+
+<section id="escapades" class="wrap">
+  <div class="sec-h">
+    <h2>Escapades autour d'Argelès</h2>
+    <p>Distances et temps depuis la maison, à titre indicatif. Les fermetures signalées concernent nos dates.</p>
+  </div>
+  <div class="filters" role="group" aria-label="Filtrer les escapades" id="filters"></div>
+  <div class="trips" id="trips"></div>
+</section>
+
+<section id="carte" class="wrap">
+  <div class="sec-h">
+    <h2>La carte</h2>
+    <p>Carte schématique, autour de la maison ou sur toute la côte jusqu'au cap de Creus. Touchez un point pour le détail ; les jours du programme mettent leurs lieux en évidence.</p>
+  </div>
+  <div class="legend" role="group" aria-label="Échelle de la carte" id="zoom" style="margin-bottom:8px"></div>
+  <div class="legend" id="legend" role="group" aria-label="Afficher les lieux d'un jour"></div>
+  <div class="mapgrid" style="margin-top:12px">
+    <div class="mapbox"><svg id="map" viewBox="0 0 560 600" role="img" aria-label="Carte schématique de la Côte Vermeille et de l'Empordà"></svg></div>
+    <div class="mapside">
+      <div class="panel place" id="placecard" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="meteo" class="wrap">
+  <div class="sec-h">
+    <h2>Météo</h2>
+    <p>Repères pour la fin décembre sur la côte du Roussillon. Les prévisions détaillées apparaissent ici environ deux semaines avant le départ.</p>
+  </div>
+  <div class="wxgrid">
+    <div class="panel wx"><b>5° / 14°</b><span>Matin et après-midi, en moyenne</span></div>
+    <div class="panel wx"><b>13–14°</b><span>Température de la mer</span></div>
+    <div class="panel wx"><b>17h20</b><span>Coucher du soleil, environ</span></div>
+    <div class="panel wx"><b>Tramontane</b><span>Vent du nord-ouest, souvent fort et froid</span></div>
+  </div>
+  <div id="live"></div>
+</section>
+
+<section id="preparer" class="wrap">
+  <div class="sec-h">
+    <h2>Préparer le départ</h2>
+    <p>Les cases cochées et les statuts restent enregistrés sur cet appareil.</p>
+  </div>
+  <div class="prep">
+    <div class="panel">
+      <h3>À emporter</h3>
+      <div class="progress" aria-hidden="true"><i id="packbar"></i></div>
+      <div class="muted" style="font-size:.86rem" id="packcount"></div>
+      <div class="checks" id="pack"></div>
+    </div>
+    <div class="panel">
+      <h3>Réservations et démarches</h3>
+      <ul class="resa" id="resa"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="pratique" class="wrap">
+  <div class="sec-h">
+    <h2>Pratique</h2>
+  </div>
+  <div class="prat">
+    <div class="panel">
+      <h3>Trajet</h3>
+      <ul>
+        <li>Toulouse – Argelès : environ 230 km, 2 h 30 par l'A61 puis l'A9.</li>
+        <li>Sortie Perpignan-Sud, puis la voie rapide vers Argelès.</li>
+        <li>Prévoir un arrêt à Narbonne ou à la Réserve de Sigean pour couper le trajet.</li>
+        <li>Pour l'Espagne : carte d'identité ou passeport pour chacun, enfants compris.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Numéros utiles</h3>
+      <ul>
+        <li>Urgences : <span class="num">112</span></li>
+        <li>Pharmacie de garde : <span class="num">3237</span></li>
+        <li>Office de tourisme : <a href="https://www.argeles-sur-mer.com" target="_blank" rel="noopener">argeles-sur-mer.com</a></li>
+        <li>Mairie, programme des fêtes : <a href="https://www.ville-argelessurmer.fr" target="_blank" rel="noopener">ville-argelessurmer.fr</a></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Bon à savoir</h3>
+      <ul>
+        <li>Journées courtes : soleil levé vers 8 h 15, couché vers 17 h 20.</li>
+        <li>Par tramontane, préférer le sentier côtier abrité ou une visite en intérieur.</li>
+        <li>Les 25 décembre et 1er janvier, beaucoup de sites sont fermés : on vit au rythme d'Argelès.</li>
+        <li>Les courses du réveillon sont à faire le 30, les magasins ferment tôt le 31.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">
+  <div class="bonany">Bon any nou !</div>
+  <p>Carnet de voyage préparé pour Pauline, Sébastien, Jules, Hélia et Noé. Horaires et tarifs indicatifs, à vérifier avant chaque sortie.</p>
+  <p style="margin-top:10px">Sources</p>
+  <ol>
+    <li><a href="https://ville-argelessurmer.fr/system/files_force/documents/depliant_fetes_inouies_2025.pdf?download=1" target="_blank" rel="noopener">Ville d'Argelès-sur-Mer, dépliant des Fêtes inouïes 2025-2026</a></li>
+    <li><a href="https://www.pariszigzag.fr/paris-au-quotidien/bain-du-nouvel-an-argeles/" target="_blank" rel="noopener">Paris Zigzag, le bain du Nouvel An à Argelès</a></li>
+    <li><a href="https://www.routard.com/fr/guide/france/languedoc-roussillon/pyrenees-orientales/collioure/chateau-royal" target="_blank" rel="noopener">Routard, Château royal de Collioure</a></li>
+    <li><a href="https://www.anigaido.com/lieux/parcs-animaliers/reserve-africaine-de-sigean" target="_blank" rel="noopener">Anigaïdo, Réserve africaine de Sigean</a></li>
+    <li><a href="https://barcelonaurbana.com/ca/blog/museu-dali-figueres-preus-i-combinada-residents" target="_blank" rel="noopener">Barcelona Urbana, Théâtre-musée Dalí</a></li>
+    <li>Échanges avec Valérie sur HomeExchange, octobre 2026</li>
+  </ol>
+</footer>
+
+<script>
+/* ------------------------------------------------------------------
+   Contenu du séjour : c'est ici qu'il faut intervenir pour modifier.
+   ------------------------------------------------------------------ */
+const ARRIVAL = "2026-12-29T15:00:00+01:00";
+const MIDNIGHT = "2027-01-01T00:00:00+01:00";
+
+const PLACES = {
+  maison:   {name:"La maison", lat:42.546, lon:3.020, home:true, txt:"Chez Valérie, près du village d'Argelès. Point de départ de toutes les journées."},
+  esplanade:{name:"Esplanade Charles-Trenet", lat:42.555, lon:3.044, txt:"Argelès-Plage, face à la mer : Réveillons de la Plage, concerts, réveillon du 31 et bain du 1er janvier."},
+  village:  {name:"Argelès village", lat:42.547, lon:3.025, label:false, txt:"Centre ancien, marchés, commerces, cinéma et médiathèque à pied depuis la maison."},
+  larrieu:  {name:"Réserve du Mas Larrieu", lat:42.570, lon:3.040, txt:"Réserve naturelle à l'embouchure du Tech : dunes, lagunes et oiseaux, balade à plat accessible aux enfants."},
+  racou:    {name:"Le Racou", lat:42.533, lon:3.056, txt:"Petit quartier de cabanes au bout de la plage, départ du sentier du littoral vers Collioure."},
+  valmy:    {name:"Saint-Laurent-du-Mont", lat:42.528, lon:3.000, txt:"Depuis le parc de Valmy, montée vers la chapelle Saint-Laurent-du-Mont : vue sur toute la plaine et la mer."},
+  massane:  {name:"Tour de la Massane", lat:42.477, lon:3.028, txt:"Tour de guet médiévale sur la crête des Albères, à plus de 790 m. Randonnée sportive, pour Jules et les adultes."},
+  collioure:{name:"Collioure", lat:42.526, lon:3.083, txt:"Port, clocher, Château royal et ruelles des peintres fauves. Le château est ouvert de 10 h à 17 h en hiver, fermé le 1er janvier."},
+  portvendres:{name:"Port-Vendres", lat:42.518, lon:3.107, txt:"Port de pêche en activité, criée et anse abritée, à prolonger vers le cap Béar."},
+  banyuls:  {name:"Banyuls-sur-Mer", lat:42.483, lon:3.129, txt:"Front de mer, vignes en terrasses et réserve marine de Cerbère-Banyuls."},
+  perpignan:{name:"Perpignan", lat:42.699, lon:2.895, txt:"Le Castillet, le Palais des rois de Majorque et le centre ancien, à 25 minutes."},
+  elne:     {name:"Elne", lat:42.600, lon:2.971, txt:"Ville perchée et son cloître roman, l'un des plus beaux du Roussillon."},
+  ceret:    {name:"Céret", lat:42.486, lon:2.748, txt:"Vieux pont, platanes et musée d'art moderne, au pied du Vallespir."},
+  figueres: {name:"Figueres", lat:42.267, lon:2.961, txt:"Théâtre-musée Dalí, en Espagne. Fermé le 1er janvier et le 25 décembre, billets en ligne conseillés."},
+  cadaques: {name:"Cadaqués", lat:42.289, lon:3.278, txt:"Village blanc de la presqu'île du cap de Creus. Journée longue : la route côtière est lente."},
+  stcyprien:{name:"Saint-Cyprien", lat:42.618, lon:3.006, txt:"Station voisine, port de plaisance et longue plage."}
+};
+
+const DAYS = [
+  {d:"2026-12-28", opt:true, title:"Arrivée anticipée", places:["maison","village"],
+   slots:[["Après-midi","Route depuis Toulouse, installation, premières courses."],["Soir","Dîner à la maison, premier feu dans le poêle."]],
+   warn:"Seulement si Valérie choisit l'option du 28 décembre au 2 janvier."},
+  {d:"2026-12-29", title:"Arrivée et premier coucher de soleil", places:["maison","village","esplanade"],
+   slots:[["Matin","Départ de Toulouse, environ 2 h 30 de route."],["15h","Arrivée, remise des clés, installation, lits faits avec notre linge."],["16h30","Balade jusqu'à la plage pour le coucher du soleil."],["20h","Concert gratuit sur l'esplanade, si l'énergie suit."]]},
+  {d:"2026-12-30", title:"Collioure", places:["racou","collioure","esplanade"],
+   slots:[["Matin","Collioure : le port, le clocher, les ruelles. Château royal ouvert de 10 h à 17 h."],["Variante","Aller à pied par le sentier du littoral depuis le Racou (environ 2 h), retour en train ou en bus."],["15h–17h","Initiation sportive pour les enfants sur l'esplanade."],["Fin de journée","Courses du réveillon : les magasins ferment tôt le 31."]]},
+  {d:"2026-12-31", star:true, title:"Saint-Sylvestre", places:["esplanade","figueres"],
+   slots:[["Journée","Au choix : Réserve africaine de Sigean (safari en voiture) ou musée Dalí à Figueres. Ou une journée calme à la maison."],["Fin d'après-midi","Préparation du dîner, apéritif au coin du feu."],["21h","Réveillon sur l'esplanade : DJ et piste de danse en bord de mer."],["Minuit","Feu d'artifice au-dessus de la mer."]],
+   warn:"Le Château royal de Collioure est souvent fermé le 31 décembre ; vérifier les horaires du musée Dalí ce jour-là."},
+  {d:"2027-01-01", star:true, title:"Premier plouf de l'année", places:["esplanade","larrieu"],
+   slots:[["10h30","Bain du Nouvel An : les courageux à l'eau, les autres en supporters."],["12h","Concert électro lounge sur la plage, chocolat chaud."],["Après-midi","Grasse matinée rattrapée, jeux de société, balade au Mas Larrieu."]],
+   warn:"Jour férié : Château royal et musée Dalí fermés."},
+  {d:"2027-01-02", title:"Albères ou sentier côtier", places:["valmy","massane","esplanade"],
+   slots:[["Matin","Montée à la chapelle Saint-Laurent-du-Mont depuis Valmy, en famille. Pour Jules et les adultes : la tour de la Massane."],["14h–17h","Slackline et initiation cirque sur l'esplanade."],["20h","Concert du soir."]],
+   warn:"Dernière nuit si le séjour se termine le 2 : départ en fin de matinée à la place."},
+  {d:"2027-01-03", opt:true, title:"Dernier jour", places:["maison","esplanade"],
+   slots:[["Matin","Rangement, ménage, état des lieux avec Valérie."],["Midi","Dernier déjeuner face à la mer, puis route vers Toulouse."]],
+   warn:"Seulement si Valérie accepte la prolongation jusqu'au 3 janvier."}
+];
+
+/* Rythme de la dernière édition des Réveillons de la Plage, recalé sur nos dates (2026-2027). */
+const FEST = [
+  ["2026-12-28","Animation et initiation boxe","Concert pop-rock (duo)"],
+  ["2026-12-29","Initiation danse","Concert, tubes revisités"],
+  ["2026-12-30","Initiation au rugby","Concert pop-rock et rock celtique"],
+  ["2026-12-31","—","Réveillon 21h–2h, feu d'artifice à minuit"],
+  ["2027-01-01","Bain du Nouvel An à 11h, concert à 12h","Soirée DJ à 21h"],
+  ["2027-01-02","Slackline et initiation cirque","Concert de chanson française"],
+  ["2027-01-03","Slackline","Concert pop-rock, dernière soirée"]
+];
+
+const TRIPS = [
+  {name:"Collioure", place:"collioure", dist:"8 km · 12 min", tags:["famille","patrimoine","ville"],
+   txt:"Le port des peintres fauves, son clocher-phare et le Château royal. Parfait pour une matinée, avec glace ou chocolat chaud sur le quai.",
+   hours:"Château royal : 10h–17h en hiver.", closed:"Château fermé le 1er janvier, souvent aussi le 31 décembre."},
+  {name:"Sentier du littoral", place:"racou", dist:"Départ à 3 km · 2 h à pied", tags:["famille","nature","gratuit"],
+   txt:"Du Racou à Collioure par les criques et les falaises, environ 6 km. Retour en train ou en bus. Bien abrité les jours de tramontane.",
+   hours:"Libre accès.", closed:""},
+  {name:"Réserve africaine de Sigean", place:null, dist:"70 km · 50 min", tags:["petits","animaux","journée"],
+   txt:"Safari en voiture puis parc à pied : lions, girafes, rhinocéros, éléphants. Une valeur sûre pour Hélia et Noé.",
+   hours:"Hiver : safari 10h–16h, parc à pied jusqu'à 17h. Adulte 34 €, gratuit avant 4 ans.", closed:"Secteur venté en hiver : regarder la météo avant de partir."},
+  {name:"Théâtre-musée Dalí", place:"figueres", dist:"50 km · 45 min", tags:["ados","culture","espagne","pluie"],
+   txt:"Le musée conçu par Dalí lui-même : voiture sous la pluie, salle Mae West, coupole géodésique. Très visuel, il plaît autant aux enfants qu'à Jules.",
+   hours:"Entrée en ligne dès 18,50 €. Gratuit avant 8 ans.", closed:"Fermé les 25 décembre et 1er janvier."},
+  {name:"Réserve du Mas Larrieu", place:"larrieu", dist:"4 km · 10 min", tags:["petits","nature","gratuit"],
+   txt:"Dunes, lagunes et oiseaux à l'embouchure du Tech, sur sentiers plats. Idéal le 1er janvier, quand tout est fermé.",
+   hours:"Libre accès.", closed:""},
+  {name:"Chapelle Saint-Laurent-du-Mont", place:"valmy", dist:"3 km · départ de Valmy", tags:["famille","nature","gratuit"],
+   txt:"Montée dans les chênes-lièges des Albères jusqu'à une chapelle avec vue sur la plaine et la mer. Boucle d'environ 2 heures.",
+   hours:"Libre accès.", closed:""},
+  {name:"Tour de la Massane", place:"massane", dist:"Départ à 4 km · 4 à 5 h", tags:["ados","nature","sportif"],
+   txt:"La grande randonnée des Albères jusqu'à une tour de guet médiévale à près de 800 m. Pour Jules et les adultes, par temps clair.",
+   hours:"Libre accès, environ 700 m de dénivelé.", closed:"À éviter par forte tramontane."},
+  {name:"Perpignan", place:"perpignan", dist:"25 km · 25 min", tags:["ville","patrimoine","pluie"],
+   txt:"Le Castillet, le Palais des rois de Majorque et les ruelles du centre ancien. Une bonne solution de repli un jour de pluie.",
+   hours:"Horaires d'hiver à vérifier.", closed:"Monuments fermés le 1er janvier."},
+  {name:"Céret", place:"ceret", dist:"30 km · 35 min", tags:["culture","patrimoine","pluie"],
+   txt:"Le vieux pont du Diable, les platanes et le musée d'art moderne, qui garde des œuvres de Picasso, Chagall et Matisse.",
+   hours:"Horaires d'hiver à vérifier.", closed:""},
+  {name:"Elne", place:"elne", dist:"8 km · 12 min", tags:["patrimoine","culture"],
+   txt:"Une ville perchée sur sa colline et un cloître roman remarquable, pour une heure de visite tranquille.",
+   hours:"Horaires d'hiver à vérifier.", closed:""},
+  {name:"Port-Vendres et Banyuls", place:"banyuls", dist:"15 à 20 km · 25 min", tags:["famille","ville","nature"],
+   txt:"Le port de pêche, puis Banyuls et ses vignes en terrasses au-dessus de la mer. Belle route en corniche.",
+   hours:"Libre accès.", closed:""},
+  {name:"Cadaqués", place:"cadaques", dist:"80 km · 1 h 20", tags:["espagne","ville","journée"],
+   txt:"Le village blanc du cap de Creus, au bout d'une route lente et superbe. À garder pour une journée sans autre programme.",
+   hours:"Libre accès.", closed:"Long trajet aller-retour pour un séjour court."}
+];
+
+const FILTERS = {all:"Tout", petits:"Pour Hélia et Noé", ados:"Pour Jules", gratuit:"Gratuit", pluie:"Si temps gris", espagne:"En Espagne"};
+
+const PACK = {
+  "Linge (non fourni)":["Draps 160 × 2 (housse et dessus)","Drap 140 pour Jules","Drap 90 pour l'appoint","Taies d'oreiller × 6","Serviettes de toilette × 5","Torchons et linge de cuisine"],
+  "Bain du 1er janvier":["Maillots de bain","Peignoirs ou ponchos","Chaussons de plage","Déguisements, pour les plus motivés","Thermos pour le chocolat chaud"],
+  "Hiver sur la côte":["Bonnets et gants pour le soir du 31","Coupe-vent contre la tramontane","Polaires","Chaussures de marche"],
+  "Papiers et voiture":["Cartes d'identité ou passeports, enfants compris","Carte du badge de péage","Chargeurs et batterie externe"],
+  "Soirées":["Jeux de société","Enceinte pour la musique","Cotillons pour minuit"]
+};
+
+const RESA = [
+  {id:"maison", t:"Échange HomeExchange chez Valérie", s:"Prolongation à 5 nuits demandée le 19 octobre", def:"demande"},
+  {id:"autres", t:"Prévenir les autres hôtes", s:"Katla, Marine et Rémy, Sabrina et Julien, Nicolas, Florian et Anne-Sophie", def:"afaire"},
+  {id:"bois", t:"Bois pour le poêle", s:"Demander à Valérie s'il est fourni", def:"afaire"},
+  {id:"fetes", t:"Programme officiel des fêtes 2026-2027", s:"À consulter début décembre sur le site de la ville", def:"afaire"},
+  {id:"sigean", t:"Billets Réserve de Sigean", s:"Achat en ligne", def:"optionnel"},
+  {id:"dali", t:"Billets musée Dalí", s:"Créneau horaire en ligne", def:"optionnel"},
+  {id:"courses", t:"Courses du réveillon", s:"Le 30, les magasins ferment tôt le 31", def:"afaire"}
+];
+const STATUS = {afaire:"À faire", demande:"Demandé", confirme:"Confirmé", optionnel:"Optionnel", fait:"Fait"};
+
+/* ------------------------------------------------------------------ */
+const KEY = "argeles27:";
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(KEY + k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(KEY + k, JSON.stringify(v)); } catch(e){} }
+};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const DOW = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+const MON = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+const parseDay = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
+const STAY = new Set(["2026-12-29","2026-12-30","2026-12-31","2027-01-01","2027-01-02"]);
+
+/* Thème */
+(function(){
+  const root = document.documentElement, btn = $("#themebtn");
+  const saved = store.get("theme", null);
+  if (saved) root.setAttribute("data-theme", saved);
+  const isDark = () => root.getAttribute("data-theme") ? root.getAttribute("data-theme") === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const label = () => { btn.textContent = isDark() ? "Thème clair" : "Thème sombre"; };
+  label();
+  btn.addEventListener("click", () => { const next = isDark() ? "light" : "dark"; root.setAttribute("data-theme", next); store.set("theme", next); label(); });
+  try { matchMedia("(prefers-color-scheme: dark)").addEventListener("change", label); } catch(e){}
+})();
+
+/* Compte à rebours */
+function countdown(){
+  const now = Date.now(), a = new Date(ARRIVAL).getTime(), m = new Date(MIDNIGHT).getTime();
+  const days = t => Math.ceil((t - now) / 86400000);
+  let html;
+  if (now < a) {
+    html = `<div class="count"><span class="n">${days(a)}</span><span class="l">jours avant le départ</span></div>
+            <div class="count"><span class="n">${days(m)}</span><span class="l">jours avant minuit</span></div>`;
+  } else if (now < m) {
+    const h = Math.floor((m - now) / 3600000), mi = Math.floor((m - now) % 3600000 / 60000);
+    html = `<div class="count"><span class="n">${h} h ${String(mi).padStart(2,"0")}</span><span class="l">avant minuit</span></div>`;
+  } else {
+    html = `<div class="count"><span class="n">Bon any nou</span><span class="l">Bonne année 2027</span></div>`;
+  }
+  $("#countdown").innerHTML = html;
+}
+countdown(); setInterval(countdown, 30000);
+
+/* Programme */
+let activeDay = null;
+function renderDays(){
+  $("#days").innerHTML = DAYS.map((d, i) => {
+    const dt = parseDay(d.d);
+    const cls = ["day", d.opt ? "opt" : "", d.star ? "star" : ""].join(" ");
+    return `<article class="${cls}" id="j-${d.d}">
+      <div class="when"><span class="dow">${DOW[dt.getDay()]}</span><span class="dnum">${dt.getDate()}</span><span class="mon">${MON[dt.getMonth()]} ${dt.getFullYear()}</span></div>
+      <div class="body">
+        <div style="display:flex; gap:10px; justify-content:space-between; align-items:baseline; flex-wrap:wrap">
+          <h3>${esc(d.title)}</h3>${d.opt ? '<span class="pill ask">Selon la réponse de Valérie</span>' : ""}
+        </div>
+        <ul class="slots">${d.slots.map(s => `<li><span class="t">${esc(s[0])}</span><span class="x">${esc(s[1])}</span></li>`).join("")}</ul>
+        ${d.warn ? `<div class="warn">${esc(d.warn)}</div>` : ""}
+        <div class="dayfoot"><button class="chip" type="button" data-day="${i}">Voir sur la carte</button></div>
+      </div>
+    </article>`;
+  }).join("");
+  $("#days").addEventListener("click", e => {
+    const b = e.target.closest("[data-day]"); if (!b) return;
+    setDay(+b.dataset.day); document.getElementById("carte").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+  });
+}
+
+/* Fêtes */
+function renderFest(){
+  $("#festtable").innerHTML = FEST.map(f => {
+    const dt = parseDay(f[0]);
+    return `<tr class="${STAY.has(f[0]) ? "us" : ""}"><td class="d">${DOW[dt.getDay()].slice(0,3)}. ${dt.getDate()} ${MON[dt.getMonth()].slice(0,4)}.</td><td>${esc(f[1])}</td><td>${esc(f[2])}</td></tr>`;
+  }).join("");
+}
+
+/* Escapades */
+let filter = "all";
+function renderTrips(){
+  $("#filters").innerHTML = Object.entries(FILTERS).map(([k,v]) => `<button class="chip" type="button" data-f="${k}" aria-pressed="${k === filter}">${v}</button>`).join("");
+  const list = TRIPS.filter(t => filter === "all" || t.tags.includes(filter));
+  $("#trips").innerHTML = list.map(t => `<article class="trip">
+    <header><h3>${esc(t.name)}</h3><span class="dist">${esc(t.dist)}</span></header>
+    <p>${esc(t.txt)}</p>
+    <div class="hours">${esc(t.hours)}</div>
+    ${t.closed ? `<div class="closed">${esc(t.closed)}</div>` : ""}
+    <div class="tags">${t.tags.map(g => `<span class="tag">${esc(g)}</span>`).join("")}</div>
+    ${t.place ? `<button class="chip" type="button" data-place="${t.place}" style="justify-self:start">Situer sur la carte</button>` : ""}
+  </article>`).join("");
+}
+$("#filters").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (!b) return; filter = b.dataset.f; renderTrips(); });
+$("#trips").addEventListener("click", e => {
+  const b = e.target.closest("[data-place]"); if (!b) return;
+  showPlace(b.dataset.place); document.getElementById("carte").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+});
+
+/* Carte schématique : projection équirectangulaire corrigée de la latitude, deux échelles */
+const VIEWS = {
+  near:{label:"Autour de la maison", lon0:2.925, lon1:3.165, lat0:42.462, lat1:42.630},
+  wide:{label:"Toute la côte", lon0:2.70, lon1:3.34, lat0:42.24, lat1:42.75}
+};
+/* Position des étiquettes : r = à droite, l = à gauche, décalage vertical en px ; null = pas d'étiquette */
+const LBL = {
+  near:{maison:["l",4], esplanade:["r",4], village:null, larrieu:["r",4], racou:["r",14], valmy:["l",4], massane:["r",4], collioure:["r",-6], portvendres:["r",12], banyuls:["l",4], elne:["r",4], stcyprien:["r",4]},
+  wide:{maison:["l",4], esplanade:null, village:null, larrieu:null, racou:null, valmy:null, massane:null, collioure:["r",4], portvendres:null, banyuls:["r",4], elne:["l",4], stcyprien:["r",4], perpignan:["r",4], ceret:["r",4], figueres:["r",4], cadaques:["l",4]}
+};
+let view = "near";
+const K = Math.cos(42.5 * Math.PI / 180), MW = 560, MH = 600;
+function proj(){ const v = VIEWS[view]; const S = Math.min(MW / ((v.lon1 - v.lon0) * K), MH / (v.lat1 - v.lat0));
+  return (lon, lat) => [ (lon - v.lon0) * K * S, (v.lat1 - lat) * S ]; }
+const inView = (p, k) => { const v = VIEWS[k]; return p.lon >= v.lon0 && p.lon <= v.lon1 && p.lat >= v.lat0 && p.lat <= v.lat1; };
+const COAST = [[3.040,42.76],[3.037,42.70],[3.041,42.65],[3.043,42.62],[3.044,42.585],[3.045,42.56],[3.048,42.545],[3.052,42.537],[3.060,42.531],[3.068,42.532],[3.074,42.528],[3.080,42.522],[3.086,42.525],[3.092,42.527],[3.097,42.523],[3.103,42.518],[3.108,42.512],[3.113,42.516],[3.122,42.517],[3.137,42.512],[3.130,42.503],[3.128,42.494],[3.126,42.484],[3.133,42.479],[3.150,42.474],[3.172,42.465],[3.166,42.446],[3.160,42.426],[3.170,42.408],[3.158,42.385],[3.157,42.366],[3.180,42.352],[3.198,42.341],[3.232,42.349],[3.262,42.338],[3.296,42.333],[3.322,42.319],[3.304,42.303],[3.284,42.290],[3.276,42.271],[3.240,42.262],[3.200,42.262],[3.176,42.255],[3.150,42.244],[3.130,42.236]];
+const LAND = [...COAST, [2.60,42.20],[2.60,42.80],[3.040,42.80]];
+const BORDER = [[3.163,42.432],[3.120,42.447],[3.070,42.458],[3.030,42.470],[2.990,42.468],[2.945,42.476],[2.900,42.468],[2.862,42.463],[2.820,42.455],[2.770,42.440],[2.700,42.428]];
+const RIDGE = [[3.120,42.452],[3.070,42.466],[3.030,42.478],[2.990,42.474],[2.945,42.482],[2.900,42.474]];
+const TECH = [[2.700,42.475],[2.748,42.486],[2.790,42.505],[2.830,42.522],[2.880,42.545],[2.930,42.560],[2.980,42.567],[3.020,42.570],[3.042,42.574]];
+
+function drawMap(){
+  const svg = $("#map"), P = proj();
+  const pts = a => a.map(([lo,la]) => P(lo,la).map(v => v.toFixed(1)).join(",")).join(" ");
+  const T = (cls, lon, lat, txt, dx=0, dy=0, anchor="start") => { const [x,y] = P(lon,lat); return `<text class="m-lbl ${cls}" x="${(x+dx).toFixed(1)}" y="${(y+dy).toFixed(1)}" text-anchor="${anchor}">${txt}</text>`; };
+  let h = `<rect class="m-sea" x="0" y="0" width="${MW}" height="${MH}"/>
+    <polygon class="m-land" points="${pts(LAND)}"/>
+    <polyline class="m-ridge" points="${pts(RIDGE)}"/>
+    <polyline class="m-river" points="${pts(TECH)}"/>
+    <polyline class="m-border" points="${pts(BORDER)}"/>`;
+  if (view === "wide") {
+    h += T("ctry",2.78,42.505,"FRANCE") + T("ctry",2.78,42.405,"ESPAGNE") + T("sea",3.20,42.62,"Méditerranée")
+       + T("small",2.95,42.47,"Massif des Albères",0,16) + T("small",2.86,42.535,"le Tech",0,14)
+       + T("small",2.72,42.75,"↑ Sigean 70 km · Toulouse 230 km",0,14);
+  } else {
+    h += T("ctry",2.94,42.455,"ESPAGNE",0,0) + T("sea",3.09,42.60,"Méditerranée")
+       + T("small",2.96,42.486,"Massif des Albères",0,-2) + T("small",2.95,42.566,"le Tech",0,-6)
+       + T("small",3.03,42.625,"↑ Perpignan 25 km",0,8);
+  }
+  for (const [k,p] of Object.entries(PLACES)) {
+    if (!inView(p, view) || p.label === false) continue;
+    const [x,y] = P(p.lon, p.lat), lb = LBL[view][k];
+    const lab = lb ? `<text class="m-lbl" x="${(lb[0]==="r" ? x+10 : x-10).toFixed(1)}" y="${(y+lb[1]).toFixed(1)}" text-anchor="${lb[0]==="r" ? "start" : "end"}">${esc(p.name)}</text>` : "";
+    h += `<g class="pin${p.home ? " home" : ""}" data-p="${k}" tabindex="0" role="button" aria-label="${esc(p.name)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${p.home ? 7.5 : 6}"/>${lab}</g>`;
+  }
+  svg.innerHTML = h;
+  $("#zoom").innerHTML = Object.entries(VIEWS).map(([k,v]) => `<button class="chip" type="button" data-v="${k}" aria-pressed="${k === view}">${v.label}</button>`).join("");
+}
+function setView(v){ if (v !== view){ view = v; drawMap(); } }
+$("#zoom").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (!b) return; setView(b.dataset.v); if (activeDay !== null) highlight(DAYS[activeDay].places); });
+$("#map").addEventListener("click", e => { const g = e.target.closest("[data-p]"); if (g) showPlace(g.dataset.p); });
+$("#map").addEventListener("keydown", e => { const g = e.target.closest && e.target.closest("[data-p]"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); showPlace(g.dataset.p); } });
+function highlight(keys){
+  document.querySelectorAll("#map .pin").forEach(g => g.classList.toggle("on", keys.includes(g.dataset.p)));
+}
+function showPlace(k){
+  const p = PLACES[k]; if (!p) return;
+  if (!inView(p, view)) setView("wide");
+  highlight([k]); activeDay = null; renderLegend();
+  const osm = `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lon}#map=14/${p.lat}/${p.lon}`;
+  const days = DAYS.filter(d => d.places.includes(k)).map(d => { const dt = parseDay(d.d); return `${DOW[dt.getDay()].toLowerCase()} ${dt.getDate()}`; });
+  $("#placecard").innerHTML = `<h3>${esc(p.name)}</h3><p>${esc(p.txt)}</p>
+    ${days.length ? `<p class="muted" style="font-size:.9rem">Au programme : ${days.join(", ")}.</p>` : ""}
+    <a href="${osm}" target="_blank" rel="noopener">Ouvrir dans OpenStreetMap</a>`;
+}
+function setDay(i){
+  activeDay = i; const d = DAYS[i], dt = parseDay(d.d);
+  setView(d.places.every(k => inView(PLACES[k], "near")) ? "near" : "wide");
+  highlight(d.places); renderLegend();
+  $("#placecard").innerHTML = `<h3>${DOW[dt.getDay()]} ${dt.getDate()} ${MON[dt.getMonth()]}</h3><p><b>${esc(d.title)}</b></p>
+    <p>${d.places.map(k => esc(PLACES[k].name)).join(" · ")}</p><a href="#j-${d.d}">Revenir au programme du jour</a>`;
+}
+function renderLegend(){
+  $("#legend").innerHTML = DAYS.map((d,i) => { const dt = parseDay(d.d);
+    return `<button class="chip" type="button" data-day="${i}" aria-pressed="${activeDay === i}">${DOW[dt.getDay()].slice(0,3)}. ${dt.getDate()}</button>`; }).join("");
+}
+$("#legend").addEventListener("click", e => { const b = e.target.closest("[data-day]"); if (b) setDay(+b.dataset.day); });
+
+/* Météo en direct, quand les dates entrent dans la fenêtre de prévision */
+async function liveWeather(){
+  const box = $("#live");
+  const start = new Date("2026-12-28T00:00:00+01:00").getTime(), end = new Date("2027-01-04T00:00:00+01:00").getTime();
+  const horizon = Date.now() + 15 * 86400000;
+  if (horizon < start || Date.now() > end) {
+    const left = Math.ceil((start - 15 * 86400000 - Date.now()) / 86400000);
+    box.innerHTML = Date.now() > end ? "" : `<p class="note">Prévisions disponibles dans environ ${left} jours, vers le 13 décembre.</p>`;
+    return;
+  }
+  try {
+    const url = "https://api.open-meteo.com/v1/forecast?latitude=42.546&longitude=3.024&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Europe%2FParis&forecast_days=16";
+    const r = await fetch(url); if (!r.ok) throw 0; const j = await r.json();
+    const CODE = c => c === 0 ? "Soleil" : c <= 2 ? "Éclaircies" : c === 3 ? "Couvert" : c <= 48 ? "Brouillard" : c <= 57 ? "Bruine" : c <= 67 ? "Pluie" : c <= 77 ? "Neige" : c <= 82 ? "Averses" : "Orages";
+    const rows = j.daily.time.map((t,i) => ({t, c:j.daily.weather_code[i], mx:j.daily.temperature_2m_max[i], mn:j.daily.temperature_2m_min[i], w:j.daily.wind_speed_10m_max[i]}))
+      .filter(x => { const v = new Date(x.t + "T12:00:00+01:00").getTime(); return v >= start && v < end; });
+    if (!rows.length) throw 0;
+    box.innerHTML = `<h3 style="font-size:1.2rem; margin-bottom:10px">Prévisions sur place</h3><div class="fc">${rows.map(x => { const dt = parseDay(x.t);
+      return `<div class="panel wx"><span>${DOW[dt.getDay()].slice(0,3)}. ${dt.getDate()}</span><b>${Math.round(x.mn)}° / ${Math.round(x.mx)}°</b><span>${CODE(x.c)}, vent ${Math.round(x.w)} km/h</span></div>`; }).join("")}</div>`;
+  } catch(e) {
+    box.innerHTML = `<p class="note">Prévisions momentanément indisponibles. Consulter Météo-France pour Argelès-sur-Mer.</p>`;
+  }
+}
+
+/* Préparer */
+function renderPack(){
+  const done = store.get("pack", {});
+  let n = 0, total = 0, h = "";
+  for (const [grp, items] of Object.entries(PACK)) {
+    h += `<h4>${esc(grp)}</h4>`;
+    items.forEach((it, i) => { const id = `pk-${grp.slice(0,4).replace(/\W/g,"")}-${i}`; total++; if (done[id]) n++;
+      h += `<label for="${id}"><input type="checkbox" id="${id}" data-k="${id}" ${done[id] ? "checked" : ""}><span>${esc(it)}</span></label>`; });
+  }
+  $("#pack").innerHTML = h;
+  $("#packbar").style.width = (total ? n / total * 100 : 0) + "%";
+  $("#packcount").textContent = `${n} sur ${total} prêts`;
+}
+$("#pack").addEventListener("change", e => { const k = e.target.dataset.k; if (!k) return; const done = store.get("pack", {}); done[k] = e.target.checked; store.set("pack", done); renderPack(); });
+
+function renderResa(){
+  const st = store.get("resa", {});
+  $("#resa").innerHTML = RESA.map(r => { const v = st[r.id] || r.def;
+    return `<li><div class="w"><b>${esc(r.t)}</b><small>${esc(r.s)}</small></div>
+      <label class="sr" for="rs-${r.id}">Statut : ${esc(r.t)}</label>
+      <select id="rs-${r.id}" data-r="${r.id}">${Object.entries(STATUS).map(([k,l]) => `<option value="${k}" ${k === v ? "selected" : ""}>${l}</option>`).join("")}</select></li>`; }).join("");
+  const house = st.maison || "demande";
+  const hs = $("#housestatus"); hs.className = "pill " + (house === "confirme" || house === "fait" ? "ok" : "ask");
+  hs.textContent = house === "confirme" || house === "fait" ? "Échange confirmé" : "Prolongation demandée";
+}
+$("#resa").addEventListener("change", e => { const k = e.target.dataset.r; if (!k) return; const st = store.get("resa", {}); st[k] = e.target.value; store.set("resa", st); renderResa(); });
+
+/* Feux d'artifice du bandeau */
+(function(){
+  const cv = $("#fw"), cx = cv.getContext("2d"); if (!cx) return;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const COLS = ["#F6D07A","#F2A28F","#F07B63","#B99BE0","#8FD3EA","#FFFFFF"];
+  let W = 0, H = 0, parts = [], stars = [], run = true, last = 0, next = 0;
+  function size(){ const r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr,0,0,dpr,0,0);
+    stars = Array.from({length: Math.round(W * H / 5200)}, () => ({x:Math.random()*W, y:Math.random()*H*.8, a:.25+Math.random()*.5}));
+    if (reduce) still(); }
+  function burst(x, y){ const c = COLS[Math.floor(Math.random()*COLS.length)], n = 46;
+    for (let i = 0; i < n; i++){ const ang = i / n * Math.PI * 2, sp = 1.1 + Math.random() * 1.6;
+      parts.push({x, y, vx:Math.cos(ang)*sp, vy:Math.sin(ang)*sp, life:1, c}); } }
+  function drawStars(){ for (const s of stars){ cx.globalAlpha = s.a; cx.fillStyle = "#EEF1FA"; cx.fillRect(s.x, s.y, 1.2, 1.2); } cx.globalAlpha = 1; }
+  function still(){ cx.clearRect(0,0,W,H); drawStars(); parts = []; burst(W*.78, H*.32);
+    for (let k = 0; k < 34; k++) step(true); paint(); }
+  function step(){ for (const p of parts){ p.x += p.vx; p.y += p.vy; p.vx *= .975; p.vy = p.vy * .975 + .018; p.life -= .011; } parts = parts.filter(p => p.life > 0); }
+  function paint(){ for (const p of parts){ cx.globalAlpha = Math.max(0, p.life) * .9; cx.fillStyle = p.c; cx.beginPath(); cx.arc(p.x, p.y, 1.6, 0, Math.PI*2); cx.fill(); } cx.globalAlpha = 1; }
+  function frame(t){ if (!run) return; requestAnimationFrame(frame);
+    if (t - last < 33) return; last = t;
+    if (t > next){ burst(W*(.45 + Math.random()*.5), H*(.12 + Math.random()*.35)); next = t + 1800 + Math.random()*2200; }
+    cx.clearRect(0,0,W,H); drawStars(); step(); paint(); }
+  size(); window.addEventListener("resize", size);
+  if (reduce) return;
+  try { new IntersectionObserver(es => { const vis = es[0].isIntersecting; if (vis && !run){ run = true; requestAnimationFrame(frame); } else if (!vis) run = false; }).observe(cv); } catch(e){}
+  document.addEventListener("visibilitychange", () => { if (document.hidden) run = false; else if (!run){ run = true; requestAnimationFrame(frame); } });
+  requestAnimationFrame(frame);
+})();
+
+renderDays(); renderFest(); renderTrips(); drawMap(); renderLegend(); showPlace("maison"); renderPack(); renderResa(); liveWeather();
+</script>
