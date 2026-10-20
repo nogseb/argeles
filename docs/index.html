@@ -9,6 +9,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap">
 <style>
 /* Carnet de voyage, mobile d'abord. Palette « chaux et vermeil » : murs chaulés de Collioure, rouge vermeil, bleu de la Méditerranée l'hiver, chêne-liège des Albères ; la nuit du réveillon en bandeau. */
@@ -18,6 +19,7 @@
   --sea:#1C6888; --cork:#56662A; --gold:#8F6200; --violet:#6A3D8F;
   --ok:#2C7A4A; --todo:#A4560F; --opt:#5A6880; --ask:#6A3D8F;
   --night:#0D1630; --night-2:#1A2752; --night-ink:#EEF1FA; --night-mute:#AEB7D3;
+  --tiles:none;
   --f-display:"Young Serif", Georgia, "Times New Roman", serif;
   --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-mono:"DM Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -27,12 +29,12 @@
   --paper:#0F1626; --surface:#172036; --ink:#E8ECF4; --ink-2:#A7B0C6; --rule:#2A3550; --tint:#1D2842;
   --accent:#F07B63; --accent-ink:#2A0E08; --accent-soft:#4A231C;
   --sea:#62B8D8; --cork:#AFC174; --gold:#E6B64C; --violet:#B99BE0;
-  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC6; --ask:#B99BE0; color-scheme:dark; } }
+  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC6; --ask:#B99BE0; --tiles:invert(.92) hue-rotate(180deg) brightness(.95) contrast(.9) saturate(.6); color-scheme:dark; } }
 :root[data-theme="dark"]{
   --paper:#0F1626; --surface:#172036; --ink:#E8ECF4; --ink-2:#A7B0C6; --rule:#2A3550; --tint:#1D2842;
   --accent:#F07B63; --accent-ink:#2A0E08; --accent-soft:#4A231C;
   --sea:#62B8D8; --cork:#AFC174; --gold:#E6B64C; --violet:#B99BE0;
-  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC6; --ask:#B99BE0; color-scheme:dark; }
+  --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC6; --ask:#B99BE0; --tiles:invert(.92) hue-rotate(180deg) brightness(.95) contrast(.9) saturate(.6); color-scheme:dark; }
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%; scroll-padding-top:calc(var(--nav-h) + 14px); scroll-behavior:smooth}
@@ -218,6 +220,39 @@ tr.us td{background:var(--accent-soft)}
 .prat ul{margin:0; padding-left:18px; display:grid; gap:4px}
 .num{font-family:var(--f-mono); font-size:1.05rem; font-variant-numeric:tabular-nums}
 
+/* Leaflet 1.9.4 (feuille de style intégrée) */
+.leaflet-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container, .leaflet-pane > svg, .leaflet-pane > canvas, .leaflet-zoom-box, .leaflet-image-layer, .leaflet-layer { position: absolute; left: 0; top: 0; } .leaflet-container { overflow: hidden; } .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow { -webkit-user-select: none; -moz-user-select: none; user-select: none; -webkit-user-drag: none; } .leaflet-tile::selection { background: transparent; } .leaflet-safari .leaflet-tile { image-rendering: -webkit-optimize-contrast; } .leaflet-safari .leaflet-tile-container { width: 1600px; height: 1600px; -webkit-transform-origin: 0 0; } .leaflet-marker-icon, .leaflet-marker-shadow { display: block; } .leaflet-container .leaflet-overlay-pane svg { max-width: none !important; max-height: none !important; } .leaflet-container .leaflet-marker-pane img, .leaflet-container .leaflet-shadow-pane img, .leaflet-container .leaflet-tile-pane img, .leaflet-container img.leaflet-image-layer, .leaflet-container .leaflet-tile { max-width: none !important; max-height: none !important; width: auto; padding: 0; } .leaflet-container img.leaflet-tile { mix-blend-mode: plus-lighter; } .leaflet-container.leaflet-touch-zoom { -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; } .leaflet-container.leaflet-touch-drag { -ms-touch-action: pinch-zoom; touch-action: none; touch-action: pinch-zoom; } .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom { -ms-touch-action: none; touch-action: none; } .leaflet-container { -webkit-tap-highlight-color: transparent; } .leaflet-container a { -webkit-tap-highlight-color: rgba(51, 181, 229, 0.4); } .leaflet-tile { filter: inherit; visibility: hidden; } .leaflet-tile-loaded { visibility: inherit; } .leaflet-zoom-box { width: 0; height: 0; -moz-box-sizing: border-box; box-sizing: border-box; z-index: 800; } .leaflet-overlay-pane svg { -moz-user-select: none; } .leaflet-pane { z-index: 400; } .leaflet-tile-pane { z-index: 200; } .leaflet-overlay-pane { z-index: 400; } .leaflet-shadow-pane { z-index: 500; } .leaflet-marker-pane { z-index: 600; } .leaflet-tooltip-pane { z-index: 650; } .leaflet-popup-pane { z-index: 700; } .leaflet-map-pane canvas { z-index: 100; } .leaflet-map-pane svg { z-index: 200; } .leaflet-vml-shape { width: 1px; height: 1px; } .leaflet-control { position: relative; z-index: 800; pointer-events: visiblePainted; pointer-events: auto; } .leaflet-top, .leaflet-bottom { position: absolute; z-index: 1000; pointer-events: none; } .leaflet-top { top: 0; } .leaflet-right { right: 0; } .leaflet-bottom { bottom: 0; } .leaflet-left { left: 0; } .leaflet-control { float: left; clear: both; } .leaflet-right .leaflet-control { float: right; } .leaflet-top .leaflet-control { margin-top: 10px; } .leaflet-bottom .leaflet-control { margin-bottom: 10px; } .leaflet-left .leaflet-control { margin-left: 10px; } .leaflet-right .leaflet-control { margin-right: 10px; } .leaflet-fade-anim .leaflet-popup { opacity: 0; -webkit-transition: opacity 0.2s linear; -moz-transition: opacity 0.2s linear; transition: opacity 0.2s linear; } .leaflet-fade-anim .leaflet-map-pane .leaflet-popup { opacity: 1; } .leaflet-zoom-animated { -webkit-transform-origin: 0 0; -ms-transform-origin: 0 0; transform-origin: 0 0; } svg.leaflet-zoom-animated { will-change: transform; } .leaflet-zoom-anim .leaflet-zoom-animated { -webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1); -moz-transition: -moz-transform 0.25s cubic-bezier(0,0,0.25,1); transition: transform 0.25s cubic-bezier(0,0,0.25,1); } .leaflet-zoom-anim .leaflet-tile, .leaflet-pan-anim .leaflet-tile { -webkit-transition: none; -moz-transition: none; transition: none; } .leaflet-zoom-anim .leaflet-zoom-hide { visibility: hidden; } .leaflet-interactive { cursor: pointer; } .leaflet-grab { cursor: -webkit-grab; cursor: -moz-grab; cursor: grab; } .leaflet-crosshair, .leaflet-crosshair .leaflet-interactive { cursor: crosshair; } .leaflet-popup-pane, .leaflet-control { cursor: auto; } .leaflet-dragging .leaflet-grab, .leaflet-dragging .leaflet-grab .leaflet-interactive, .leaflet-dragging .leaflet-marker-draggable { cursor: move; cursor: -webkit-grabbing; cursor: -moz-grabbing; cursor: grabbing; } .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-image-layer, .leaflet-pane > svg path, .leaflet-tile-container { pointer-events: none; } .leaflet-marker-icon.leaflet-interactive, .leaflet-image-layer.leaflet-interactive, .leaflet-pane > svg path.leaflet-interactive, svg.leaflet-image-layer.leaflet-interactive path { pointer-events: visiblePainted; pointer-events: auto; } .leaflet-container { background: #ddd; outline-offset: 1px; } .leaflet-container a { color: #0078A8; } .leaflet-zoom-box { border: 2px dotted #38f; background: rgba(255,255,255,0.5); } .leaflet-container { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-size: 12px; font-size: 0.75rem; line-height: 1.5; } .leaflet-bar { box-shadow: 0 1px 5px rgba(0,0,0,0.65); border-radius: 4px; } .leaflet-bar a { background-color: #fff; border-bottom: 1px solid #ccc; width: 26px; height: 26px; line-height: 26px; display: block; text-align: center; text-decoration: none; color: black; } .leaflet-bar a, .leaflet-control-layers-toggle { background-position: 50% 50%; background-repeat: no-repeat; display: block; } .leaflet-bar a:hover, .leaflet-bar a:focus { background-color: #f4f4f4; } .leaflet-bar a:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; } .leaflet-bar a:last-child { border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: none; } .leaflet-bar a.leaflet-disabled { cursor: default; background-color: #f4f4f4; color: #bbb; } .leaflet-touch .leaflet-bar a { width: 30px; height: 30px; line-height: 30px; } .leaflet-touch .leaflet-bar a:first-child { border-top-left-radius: 2px; border-top-right-radius: 2px; } .leaflet-touch .leaflet-bar a:last-child { border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; } .leaflet-control-zoom-in, .leaflet-control-zoom-out { font: bold 18px 'Lucida Console', Monaco, monospace; text-indent: 1px; } .leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out { font-size: 22px; } .leaflet-control-layers { box-shadow: 0 1px 5px rgba(0,0,0,0.4); background: #fff; border-radius: 5px; } .leaflet-touch .leaflet-control-layers-toggle { width: 44px; height: 44px; } .leaflet-control-layers .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle { display: none; } .leaflet-control-layers-expanded .leaflet-control-layers-list { display: block; position: relative; } .leaflet-control-layers-expanded { padding: 6px 10px 6px 6px; color: #333; background: #fff; } .leaflet-control-layers-scrollbar { overflow-y: scroll; overflow-x: hidden; padding-right: 5px; } .leaflet-control-layers-selector { margin-top: 2px; position: relative; top: 1px; } .leaflet-control-layers label { display: block; font-size: 13px; font-size: 1.08333em; } .leaflet-control-layers-separator { height: 0; border-top: 1px solid #ddd; margin: 5px -10px 5px -6px; } .leaflet-container .leaflet-control-attribution { background: #fff; background: rgba(255, 255, 255, 0.8); margin: 0; } .leaflet-control-attribution, .leaflet-control-scale-line { padding: 0 5px; color: #333; line-height: 1.4; } .leaflet-control-attribution a { text-decoration: none; } .leaflet-control-attribution a:hover, .leaflet-control-attribution a:focus { text-decoration: underline; } .leaflet-attribution-flag { display: inline !important; vertical-align: baseline !important; width: 1em; height: 0.6669em; } .leaflet-left .leaflet-control-scale { margin-left: 5px; } .leaflet-bottom .leaflet-control-scale { margin-bottom: 5px; } .leaflet-control-scale-line { border: 2px solid #777; border-top: none; line-height: 1.1; padding: 2px 5px 1px; white-space: nowrap; -moz-box-sizing: border-box; box-sizing: border-box; background: rgba(255, 255, 255, 0.8); text-shadow: 1px 1px #fff; } .leaflet-control-scale-line:not(:first-child) { border-top: 2px solid #777; border-bottom: none; margin-top: -2px; } .leaflet-control-scale-line:not(:first-child):not(:last-child) { border-bottom: 2px solid #777; } .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { box-shadow: none; } .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { border: 2px solid rgba(0,0,0,0.2); background-clip: padding-box; } .leaflet-popup { position: absolute; text-align: center; margin-bottom: 20px; } .leaflet-popup-content-wrapper { padding: 1px; text-align: left; border-radius: 12px; } .leaflet-popup-content { margin: 13px 24px 13px 20px; line-height: 1.3; font-size: 13px; font-size: 1.08333em; min-height: 1px; } .leaflet-popup-content p { margin: 17px 0; margin: 1.3em 0; } .leaflet-popup-tip-container { width: 40px; height: 20px; position: absolute; left: 50%; margin-top: -1px; margin-left: -20px; overflow: hidden; pointer-events: none; } .leaflet-popup-tip { width: 17px; height: 17px; padding: 1px; margin: -10px auto 0; pointer-events: auto; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); } .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: white; color: #333; box-shadow: 0 3px 14px rgba(0,0,0,0.4); } .leaflet-container a.leaflet-popup-close-button { position: absolute; top: 0; right: 0; border: none; text-align: center; width: 24px; height: 24px; font: 16px/24px Tahoma, Verdana, sans-serif; color: #757575; text-decoration: none; background: transparent; } .leaflet-container a.leaflet-popup-close-button:hover, .leaflet-container a.leaflet-popup-close-button:focus { color: #585858; } .leaflet-popup-scrolled { overflow: auto; } .leaflet-oldie .leaflet-popup-content-wrapper { -ms-zoom: 1; } .leaflet-oldie .leaflet-popup-tip { width: 24px; margin: 0 auto; -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)"; filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678); } .leaflet-oldie .leaflet-control-zoom, .leaflet-oldie .leaflet-control-layers, .leaflet-oldie .leaflet-popup-content-wrapper, .leaflet-oldie .leaflet-popup-tip { border: 1px solid #999; } .leaflet-div-icon { background: #fff; border: 1px solid #666; } .leaflet-tooltip { position: absolute; padding: 6px; background-color: #fff; border: 1px solid #fff; border-radius: 3px; color: #222; white-space: nowrap; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; pointer-events: none; box-shadow: 0 1px 3px rgba(0,0,0,0.4); } .leaflet-tooltip.leaflet-interactive { cursor: pointer; pointer-events: auto; } .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { position: absolute; pointer-events: none; border: 6px solid transparent; background: transparent; content: ""; } .leaflet-tooltip-bottom { margin-top: 6px; } .leaflet-tooltip-top { margin-top: -6px; } .leaflet-tooltip-bottom:before, .leaflet-tooltip-top:before { left: 50%; margin-left: -6px; } .leaflet-tooltip-top:before { bottom: 0; margin-bottom: -12px; border-top-color: #fff; } .leaflet-tooltip-bottom:before { top: 0; margin-top: -12px; margin-left: -6px; border-bottom-color: #fff; } .leaflet-tooltip-left { margin-left: -6px; } .leaflet-tooltip-right { margin-left: 6px; } .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { top: 50%; margin-top: -6px; } .leaflet-tooltip-left:before { right: 0; margin-right: -12px; border-left-color: #fff; } .leaflet-tooltip-right:before { left: 0; margin-left: -12px; border-right-color: #fff; } @media print { .leaflet-control { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+/* Suivi des demandes */
+.track-sum{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px}
+.track{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:16px; align-items:start}
+@media (max-width:860px){ .track{grid-template-columns:1fr} }
+.osm{height:520px; border:1px solid var(--rule); border-radius:var(--radius); overflow:hidden; background:var(--tint); position:relative; z-index:0}
+@media (max-width:860px){ .osm{height:380px} }
+.osm .leaflet-tile-pane{filter:var(--tiles)}
+.osm .leaflet-container{background:var(--tint); font-family:var(--f-body)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--surface); color:var(--ink); box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.leaflet-popup-content{margin:12px 14px; font-size:.92rem; line-height:1.45}
+.leaflet-popup-content b{font-family:var(--f-display); font-weight:400; font-size:1.05rem}
+.leaflet-container a.leaflet-popup-close-button{color:var(--ink-2)}
+.leaflet-bar a{background:var(--surface); color:var(--ink); border-bottom-color:var(--rule)}
+.leaflet-control-attribution{background:color-mix(in srgb, var(--surface) 85%, transparent)!important; color:var(--ink-2)}
+.leaflet-control-attribution a{color:var(--accent)}
+.mapctl{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px}
+.tilenote{font-size:.86rem; color:var(--ink-2); margin-top:8px}
+.hlist{display:grid; gap:10px; max-height:640px; overflow:auto; padding-right:2px}
+@media (max-width:860px){ .hlist{max-height:none} }
+.hgroup{font-family:var(--f-mono); font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); margin:6px 0 0}
+.hcard{background:var(--surface); border:1px solid var(--rule); border-left:4px solid var(--st); border-radius:var(--radius); padding:12px 14px; display:grid; gap:6px; min-width:0}
+.hcard.closed{opacity:.72}
+.hcard header{display:flex; justify-content:space-between; gap:8px; align-items:baseline; flex-wrap:wrap}
+.hcard h3{font-size:1.08rem}
+.hcard .where{font-size:.88rem; color:var(--ink-2)}
+.hcard p{margin:0; font-size:.92rem}
+.hcard .act{display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:.86rem}
+.st-wait{--st:var(--sea)} .st-ok{--st:var(--ok)} .st-hold{--st:var(--todo)} .st-none{--st:var(--opt)} .st-no{--st:var(--ink-2)}
+.pill.wait{color:var(--sea)} .pill.no{color:var(--ink-2)}
+.ref{color:var(--accent)}
+
 footer{margin-top:44px; border-top:1px solid var(--rule); padding-block:20px 40px; color:var(--ink-2); font-size:.8rem}
 footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
 .bonany{font-family:var(--f-display); font-size:1.4rem; color:var(--accent); margin-bottom:10px}
@@ -248,38 +283,18 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
 <section id="maison" class="wrap">
   <div class="sec-h">
     <h2>L'hébergement</h2>
-    <p>La maison de Valérie à Argelès n'est plus disponible : elle a accepté une autre demande le 18 octobre. Recherche en cours via HomeExchange, pour 4 nuits du 29 décembre au 2 janvier.</p>
+    <p>Suivi des demandes HomeExchange pour 4 nuits, du mardi 29 décembre au samedi 2 janvier. La maison de Valérie à Argelès n'est plus disponible depuis le 19 octobre : elle a accepté une autre demande.</p>
   </div>
-  <div class="house">
-    <div class="panel">
-      <div style="display:flex; justify-content:space-between; gap:10px; align-items:center; flex-wrap:wrap">
-        <h3>Piste prioritaire : Auriane</h3><span class="pill ask" id="housestatus">En recherche</span>
-      </div>
-      <dl class="facts">
-        <dt>Lieu</dt><dd>Villeneuve-de-la-Raho, au sud de Perpignan, à 5 minutes à pied des lacs et à environ 20 minutes d'Argelès.</dd>
-        <dt>Maison</dt><dd>4 chambres, 3 salles d'eau, deux WC, grande cuisine ouverte sur le salon, jardin clos de murs.</dd>
-        <dt>Linge</dt><dd>Draps et serviettes possibles, conditions à définir.</dd>
-        <dt>Ménage</dt><dd>80 euros, à régler sur place à l'arrivée.</dd>
-        <dt>Autour</dt><dd>Boulangerie et commerces à pied, supermarchés à 2 minutes en voiture, centre équestre et golf en face.</dd>
-        <dt>À vérifier</dt><dd>Disponibilité et chauffage (demande envoyée le 20 octobre).</dd>
-      </dl>
+  <div class="track-sum" id="tracksum"></div>
+  <div class="track">
+    <div>
+      <div class="mapctl" role="group" aria-label="Zone affichée" id="osmctl"></div>
+      <div class="osm" id="osm" role="region" aria-label="Carte OpenStreetMap des maisons contactées"></div>
+      <p class="tilenote" id="tilenote">Positions approximatives, au centre de chaque commune. L'étoile rouge marque l'esplanade d'Argelès, lieu du réveillon.</p>
     </div>
-    <div class="panel">
-      <h3>Couchages chez Auriane</h3>
-      <div class="beds">
-        <div class="bed"><b>180</b><span>Suite parentale, rez-de-chaussée</span></div>
-        <div class="bed"><b>140</b><span>Suite à l'étage</span></div>
-        <div class="bed"><b>140</b><span>Chambre à l'étage</span></div>
-        <div class="bed"><b>140</b><span>Chambre à l'étage</span></div>
-      </div>
-      <h3 style="margin-top:18px">Autres pistes</h3>
-      <ul class="backup">
-        <li><span><b>Katla</b>, Fitou (Aude), à 40 min d'Argelès</span><span class="pill opt">Relancée</span></li>
-        <li><span><b>Marine et Rémy</b>, Pia, à 30 min d'Argelès</span><span class="pill opt">Plan C</span></li>
-      </ul>
-      <p class="muted" style="font-size:.88rem; margin-top:10px">Une fois un échange confirmé, prévenir les autres hôtes. Hors d'Argelès, prévoir un conducteur pour le retour du réveillon.</p>
-    </div>
+    <div class="hlist" id="hlist"></div>
   </div>
+  <p class="note">Une fois un échange confirmé, prévenir les autres hôtes. Hors d'Argelès, prévoir un conducteur pour le retour du réveillon.</p>
 </section>
 
 <section id="programme" class="wrap">
@@ -490,6 +505,42 @@ const DAYS = [
    warn:"Seulement si l'hébergement retenu le permet."}
 ];
 
+
+/* Suivi des demandes d'hébergement. st : wait = demande envoyée, ok = hôte disponible, hold = en suspens, none = sans réponse, no = écartée */
+const HOUSES = [
+  {who:"Auriane", town:"Villeneuve-de-la-Raho", dep:"66", lat:42.6366, lon:2.9172, st:"wait", sent:"20 oct.", rank:1, drive:"20 min d'Argelès",
+   txt:"4 chambres (180, 140 et deux 140), 3 salles d'eau, jardin clos. Linge possible, ménage 80 euros. Lacs et commerces à pied.", ask:"Disponibilité, chauffage, conditions du linge.", url:"https://www.homeexchange.fr/homes/view/2859177"},
+  {who:"Jessy et Manu", town:"Elne", dep:"66", lat:42.6000, lon:2.9711, st:"wait", sent:"20 oct.", rank:2, drive:"10 min d'Argelès",
+   txt:"Maison de village sur trois niveaux, 160, 140 et canapé-lit avec vidéoprojecteur, 2 salles de bain, sans extérieur. Ménage en option à 100 euros.", ask:"Disponibilité, chauffage, chambre fermée au 1er étage, linge.", url:"https://www.homeexchange.fr/homes/view/2493313"},
+  {who:"Marjorie", town:"Alénya", dep:"66", lat:42.6378, lon:2.9819, st:"wait", sent:"20 oct.", rank:3, drive:"15 min d'Argelès",
+   txt:"4 chambres dont une suite, 2 salles d'eau, parc pour enfants en face. Cherche en priorité un échange réciproque aux États-Unis ou au Canada.", ask:"GuestPoints acceptés ? Disponibilité, chauffage.", url:"https://www.homeexchange.fr/homes/view/2647719"},
+  {who:"Lucile", town:"Théza", dep:"66", lat:42.6383, lon:2.9506, st:"wait", sent:"20 oct.", rank:4, drive:"15 min d'Argelès",
+   txt:"3 chambres, grande salle de jeux, 1 salle de bain. Skate-park et city stade à 3 minutes à pied.", ask:"Disponibilité, répartition des lits, chauffage, linge.", url:"https://www.homeexchange.fr/homes/view/2956929"},
+  {who:"Katla", town:"Fitou", dep:"11", lat:42.8938, lon:2.9790, st:"ok", sent:"19 oct.", rank:5, drive:"40 min d'Argelès",
+   txt:"Vue mer et étang, sur les hauteurs du village. Partante, pré-approbation expirée puis relancée. Ménage 130 euros.", ask:"Couchage et chauffage toujours inconnus.", url:"https://www.homeexchange.fr/homes/view/2550493"},
+  {who:"Marine et Rémy", town:"Pia", dep:"66", lat:42.7450, lon:2.9200, st:"ok", sent:"19 oct.", rank:6, drive:"30 min d'Argelès",
+   txt:"Villa Soléa, 3 chambres. Disponibles, mis en attente le 19 octobre. Linge à apporter.", ask:"Chauffage et salles de bain à confirmer.", url:"https://www.homeexchange.fr/homes/view/3282644"},
+  {who:"Sabrina et Julien", town:"Castets", dep:"40", lat:43.8810, lon:-1.1460, st:"hold", sent:"14 oct.", drive:"3 h de Toulouse",
+   txt:"Maison en bois sur un airial landais. Leurs plans du réveillon ne sont pas fixés ; réponse demandée pour la mi-novembre.", ask:"", url:"https://www.homeexchange.fr/homes/view/2107142"},
+  {who:"Nicolas", town:"Moliets-et-Maa", dep:"40", lat:43.8519, lon:-1.3846, st:"hold", sent:"14 oct.", drive:"3 h 15 de Toulouse",
+   txt:"Maison probablement occupée par sa famille pour les fêtes. À reparler début décembre.", ask:"", url:"https://www.homeexchange.fr/homes/view/3347893"},
+  {who:"Florian et Anne-Sophie", town:"Lit-et-Mixe", dep:"40", lat:44.0336, lon:-1.2536, st:"none", sent:"14 oct.", drive:"3 h 30 de Toulouse",
+   txt:"Grande maison en bois dans la pinède, 7 chambres. Pas de réponse.", ask:"", url:"https://www.homeexchange.fr/homes/view/3226446"},
+  {who:"Valérie", town:"Argelès-sur-Mer", dep:"66", lat:42.5460, lon:3.0240, st:"no", why:"A validé une autre demande", url:"https://www.homeexchange.fr/homes/view/2924945"},
+  {who:"Jennifer", town:"Saint-Cyprien", dep:"66", lat:42.6178, lon:3.0067, st:"no", why:"Refus", url:"https://www.homeexchange.fr/homes/view/3265890"},
+  {who:"Jeremie", town:"Vielle-Saint-Girons", dep:"40", lat:43.9550, lon:-1.3044, st:"no", why:"Pas disponible pendant les vacances", url:"https://www.homeexchange.fr/homes/view/3314423"},
+  {who:"Emilie", town:"Labenne", dep:"40", lat:43.5947, lon:-1.4253, st:"no", why:"Minimum de 7 nuits", url:"https://www.homeexchange.fr/homes/view/2292822"},
+  {who:"Ot", town:"Vilamaniscle", dep:"Espagne", lat:42.3756, lon:3.0681, st:"no", why:"Échange réciproque exigé en décembre", url:"https://www.homeexchange.fr/homes/view/3101032"}
+];
+const HST = {
+  wait:{l:"Demande envoyée", g:"Demandes en attente de réponse", pill:"wait", col:"--sea"},
+  ok:{l:"Disponible", g:"Hôtes disponibles, en repli", pill:"ok", col:"--ok"},
+  hold:{l:"En suspens", g:"En suspens", pill:"todo", col:"--todo"},
+  none:{l:"Sans réponse", g:"Sans réponse", pill:"opt", col:"--opt"},
+  no:{l:"Écartée", g:"Pistes fermées", pill:"no", col:"--ink-2"}
+};
+const ESPLANADE = [42.555, 3.044];
+
 /* Rythme de la dernière édition des Réveillons de la Plage, recalé sur nos dates (2026-2027). */
 const FEST = [
   ["2026-12-28","Animation et initiation boxe","Concert pop-rock (duo)"],
@@ -551,7 +602,7 @@ const PACK = {
 };
 
 const RESA = [
-  {id:"maison", t:"Trouver l'hébergement", s:"Auriane demandée le 20 octobre ; Katla relancée ; Marine et Rémy en plan C", def:"demande"},
+  {id:"maison", t:"Trouver l'hébergement", s:"Quatre demandes envoyées le 20 octobre, deux hôtes disponibles en repli", def:"demande"},
   {id:"autres", t:"Prévenir les autres hôtes", s:"Katla, Marine et Rémy, Sabrina et Julien, Nicolas, Florian et Anne-Sophie", def:"afaire"},
   {id:"linge", t:"Linge de maison", s:"Fourni ou à apporter, selon l'hébergement", def:"afaire"},
   {id:"fetes", t:"Programme officiel des fêtes 2026-2027", s:"À consulter début décembre sur le site de la ville", def:"afaire"},
@@ -779,11 +830,72 @@ function renderResa(){
     return `<li><div class="w"><b>${esc(r.t)}</b><small>${esc(r.s)}</small></div>
       <label class="sr" for="rs-${r.id}">Statut : ${esc(r.t)}</label>
       <select id="rs-${r.id}" data-r="${r.id}">${Object.entries(STATUS).map(([k,l]) => `<option value="${k}" ${k === v ? "selected" : ""}>${l}</option>`).join("")}</select></li>`; }).join("");
-  const house = st.maison || "demande";
-  const hs = $("#housestatus"); hs.className = "pill " + (house === "confirme" || house === "fait" ? "ok" : "ask");
-  hs.textContent = house === "confirme" || house === "fait" ? "Échange confirmé" : "En recherche";
+
 }
 $("#resa").addEventListener("change", e => { const k = e.target.dataset.r; if (!k) return; const st = store.get("resa", {}); st[k] = e.target.value; store.set("resa", st); renderResa(); });
+
+
+/* Suivi des demandes : liste et carte OpenStreetMap */
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim() || "#888";
+function renderTrack(){
+  const n = k => HOUSES.filter(h => h.st === k).length;
+  $("#tracksum").innerHTML = ["wait","ok","hold","none","no"].map(k => `<span class="pill ${HST[k].pill}">${n(k)} · ${HST[k].l.toLowerCase()}</span>`).join("");
+  let h = "";
+  for (const k of ["wait","ok","hold","none","no"]) {
+    const list = HOUSES.map((x,i) => ({...x, i})).filter(x => x.st === k).sort((a,b) => (a.rank||99) - (b.rank||99));
+    if (!list.length) continue;
+    h += `<div class="hgroup">${HST[k].g}</div>`;
+    h += list.map(x => k === "no"
+      ? `<article class="hcard closed st-no"><header><h3>${esc(x.who)}</h3><span class="where">${esc(x.town)} (${esc(x.dep)})</span></header><p>${esc(x.why)}</p></article>`
+      : `<article class="hcard st-${k}">
+          <header><h3>${x.rank ? `<span class="mono muted">${x.rank}.</span> ` : ""}${esc(x.who)}</h3><span class="pill ${HST[k].pill}">${HST[k].l}</span></header>
+          <span class="where">${esc(x.town)} (${esc(x.dep)}) · ${esc(x.drive)} · contacté le ${esc(x.sent)}</span>
+          <p>${esc(x.txt)}</p>
+          ${x.ask ? `<p class="muted">En attente : ${esc(x.ask)}</p>` : ""}
+          <div class="act"><button class="chip" type="button" data-h="${x.i}">Voir sur la carte</button><a href="${x.url}" target="_blank" rel="noopener">Annonce</a></div>
+        </article>`).join("");
+  }
+  $("#hlist").innerHTML = h;
+}
+let osm = null, osmMarkers = [], osmZone = "roussillon";
+const ZONES = {
+  roussillon:{l:"Roussillon", f:() => HOUSES.filter(x => x.dep === "66" || x.dep === "11" || x.dep === "Espagne")},
+  all:{l:"Toutes les pistes", f:() => HOUSES}
+};
+function fitZone(z){
+  if (!osm) return; osmZone = z;
+  const pts = ZONES[z].f().map(x => [x.lat, x.lon]).concat([ESPLANADE]);
+  osm.fitBounds(pts, {padding:[28,28], maxZoom:12});
+  $("#osmctl").innerHTML = Object.entries(ZONES).map(([k,v]) => `<button class="chip" type="button" data-z="${k}" aria-pressed="${k === z}">${v.l}</button>`).join("");
+}
+function initOSM(){
+  if (typeof L === "undefined") { $("#osm").innerHTML = '<p class="muted" style="padding:16px">La carte n\u2019a pas pu se charger.</p>'; return; }
+  osm = L.map("osm", {scrollWheelZoom:false, zoomControl:true, attributionControl:true});
+  let fails = 0;
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:18, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">contributeurs OpenStreetMap</a>'})
+    .on("tileerror", () => { if (++fails === 4) { L.polygon([...COAST.map(([lo,la]) => [la,lo]), [42.20,3.8], [42.80,3.8]], {stroke:true, color:tok("--sea"), weight:1.2, fillColor:tok("--sea"), fillOpacity:.14, interactive:false}).addTo(osm).bringToBack(); } if (fails === 4) $("#tilenote").innerHTML = "Le fond de carte OpenStreetMap ne s\u2019affiche pas dans cet aperçu ; il apparaît sur nogues.app/argeles. Positions approximatives, au centre de chaque commune. L\u2019étoile rouge marque l\u2019esplanade d\u2019Argelès."; })
+    .addTo(osm);
+  const star = L.divIcon({className:"", html:`<div style="font-size:22px; line-height:22px; color:${tok("--accent")}; text-shadow:0 0 3px ${tok("--surface")}">&#9733;</div>`, iconSize:[22,22], iconAnchor:[11,11]});
+  L.marker(ESPLANADE, {icon:star, keyboard:false}).addTo(osm).bindPopup("<b>Esplanade Charles-Trenet</b><br>Réveillon et feu d'artifice à minuit, bain du 1er janvier.");
+  HOUSES.forEach((x, i) => {
+    const c = tok(HST[x.st].col);
+    const m = L.circleMarker([x.lat, x.lon], {radius: x.st === "no" ? 6 : 9, color: tok("--surface"), weight:2, fillColor:c, fillOpacity: x.st === "no" ? .55 : .95})
+      .addTo(osm)
+      .bindTooltip(`${x.who} · ${x.town}`, {direction:"top", offset:[0,-8]})
+      .bindPopup(`<b>${esc(x.who)}</b><br>${esc(x.town)} (${esc(x.dep)})<br><span style="color:${c}">${HST[x.st].l}</span>${x.st === "no" ? ` · ${esc(x.why)}` : ` · ${esc(x.drive)}`}<br><a href="${x.url}" target="_blank" rel="noopener">Voir l'annonce</a> · <a href="https://www.openstreetmap.org/?mlat=${x.lat}&mlon=${x.lon}#map=13/${x.lat}/${x.lon}" target="_blank" rel="noopener">OpenStreetMap</a>`);
+    osmMarkers[i] = m;
+  });
+  fitZone("roussillon");
+}
+$("#osmctl").addEventListener("click", e => { const b = e.target.closest("[data-z]"); if (b) fitZone(b.dataset.z); });
+$("#hlist").addEventListener("click", e => {
+  const b = e.target.closest("[data-h]"); if (!b || !osm) return;
+  const x = HOUSES[+b.dataset.h], inR = ZONES.roussillon.f().includes(x);
+  if (!inR && osmZone !== "all") fitZone("all");
+  osm.setView([x.lat, x.lon], Math.max(osm.getZoom(), inR ? 12 : 10));
+  osmMarkers[+b.dataset.h].openPopup();
+  document.getElementById("osm").scrollIntoView({block:"nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+});
 
 /* Feux d'artifice du bandeau */
 (function(){
@@ -814,7 +926,7 @@ $("#resa").addEventListener("change", e => { const k = e.target.dataset.r; if (!
   requestAnimationFrame(frame);
 })();
 
-renderDays(); renderFest(); renderTrips(); drawMap(); renderLegend(); showPlace("maison"); renderPack(); renderResa(); liveWeather();
+renderTrack(); initOSM(); renderDays(); renderFest(); renderTrips(); drawMap(); renderLegend(); showPlace("maison"); renderPack(); renderResa(); liveWeather();
 </script>
 </body>
 </html>
