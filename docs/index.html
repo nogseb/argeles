@@ -264,7 +264,7 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
   <div class="wrap">
     <div class="eyebrow">Côte Vermeille · Saint-Sylvestre 2026</div>
     <h1>Argelès,<br><em>Nouvel An</em> à cinq</h1>
-    <p class="lede">Une maison près de la côte, les Albères en toile de fond et les Réveillons de la Plage d'Argelès pour fêter minuit. Carnet de route du séjour, du mardi 29 décembre au début janvier.</p>
+    <p class="lede">Une maison près de la côte, les Albères en toile de fond et les Réveillons de la Plage d'Argelès pour fêter minuit. Carnet de route du séjour, du 28 ou 29 décembre au 2 ou 3 janvier.</p>
     <div class="countrow" id="countdown" aria-live="polite"></div>
     <div class="crew" aria-label="Voyageurs"><span>Pauline</span><span>Sébastien</span><span>Jules</span><span>Hélia</span><span>Noé</span></div>
   </div>
@@ -283,7 +283,7 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
 <section id="maison" class="wrap">
   <div class="sec-h">
     <h2>L'hébergement</h2>
-    <p>Suivi des demandes HomeExchange pour 4 nuits, du mardi 29 décembre au samedi 2 janvier. La maison de Valérie à Argelès n'est plus disponible depuis le 19 octobre : elle a accepté une autre demande.</p>
+    <p>Suivi des demandes HomeExchange : 4 nuits du 29 décembre au 2 janvier, ou 6 nuits du 28 décembre au 3 janvier pour les hôtes qui l'exigent. La maison de Valérie à Argelès n'est plus disponible depuis le 19 octobre : elle a accepté une autre demande.</p>
   </div>
   <div class="track-sum" id="tracksum"></div>
   <div class="track">
@@ -300,7 +300,7 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
 <section id="programme" class="wrap">
   <div class="sec-h">
     <h2>Programme jour par jour</h2>
-    <p>Une proposition souple : une sortie par jour au plus, et les fêtes d'Argelès en fin d'après-midi. Les jours en pointillés dépendent des dates de l'hébergement retenu.</p>
+    <p>Une proposition souple : une sortie par jour au plus, et les fêtes d'Argelès en fin d'après-midi. Sébastien, Hélia et Noé arrivent les premiers, le 28 ou le 29 selon la maison ; Pauline et Jules les rejoignent le 30. Retour le 2 ou le 3 janvier, selon l'envie et la météo. Les jours en pointillés dépendent de l'hébergement retenu.</p>
   </div>
   <div class="days" id="days"></div>
   <p class="note">Les horaires des fêtes reprennent l'édition 2025-2026, la seule publiée à ce jour. Le programme 2026-2027 sort en général début décembre sur le site de la ville.</p>
@@ -416,6 +416,7 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
       <h3>Trajet</h3>
       <ul>
         <li>Toulouse – Argelès : environ 230 km, 2 h 30 par l'A61 puis l'A9.</li>
+        <li>Pauline et Jules arrivent le 30 : prévoir une seconde voiture, ou le train jusqu'à Perpignan puis une navette.</li>
         <li>Sortie Perpignan-Sud, puis la voie rapide vers Argelès.</li>
         <li>Prévoir un arrêt à Narbonne ou à la Réserve de Sigean pour couper le trajet.</li>
         <li>Pour l'Espagne : carte d'identité ou passeport pour chacun, enfants compris.</li>
@@ -461,7 +462,7 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
 /* ------------------------------------------------------------------
    Contenu du séjour : c'est ici qu'il faut intervenir pour modifier.
    ------------------------------------------------------------------ */
-const ARRIVAL = "2026-12-29T15:00:00+01:00";
+const ARRIVAL = "2026-12-28T15:00:00+01:00";
 const MIDNIGHT = "2027-01-01T00:00:00+01:00";
 
 const PLACES = {
@@ -484,25 +485,25 @@ const PLACES = {
 };
 
 const DAYS = [
-  {d:"2026-12-28", opt:true, title:"Arrivée anticipée", places:["maison","village"],
-   slots:[["Après-midi","Route depuis Toulouse, installation, premières courses."],["Soir","Dîner à la maison."]],
-   warn:"Seulement si l'hébergement retenu le permet."},
-  {d:"2026-12-29", title:"Arrivée et premier coucher de soleil", places:["maison","village","esplanade"],
-   slots:[["Matin","Départ de Toulouse, environ 2 h 30 de route."],["15h","Arrivée, remise des clés, installation."],["16h30","Balade jusqu'à la plage pour le coucher du soleil."],["20h","Concert gratuit sur l'esplanade, si l'énergie suit."]]},
-  {d:"2026-12-30", title:"Collioure", places:["racou","collioure","esplanade"],
-   slots:[["Matin","Collioure : le port, le clocher, les ruelles. Château royal ouvert de 10 h à 17 h."],["Variante","Aller à pied par le sentier du littoral depuis le Racou (environ 2 h), retour en train ou en bus."],["15h–17h","Initiation sportive pour les enfants sur l'esplanade."],["Fin de journée","Courses du réveillon : les magasins ferment tôt le 31."]]},
+  {d:"2026-12-28", opt:true, title:"Arrivée de Séb, Hélia et Noé", places:["maison","village"],
+   slots:[["Après-midi","Route depuis Toulouse, installation, premières courses."],["Soir","Dîner à la maison, soirée calme."]],
+   warn:"Seulement pour les maisons louées du 28 décembre au 3 janvier (Lucile, Marjorie). Sinon, arrivée le 29."},
+  {d:"2026-12-29", title:"À trois, entre plage et poneys", places:["larrieu","esplanade","village"],
+   slots:[["Matin","Arrivée si la maison est louée à partir du 29. Sinon, balade dans les dunes et les lagunes du Mas Larrieu."],["15h–19h","Animations enfants sur l'esplanade : balades à poney, kart à voile, jeux d'arcade."],["16h30","Coucher du soleil sur la plage."],["20h","Concert gratuit sur l'esplanade, si l'énergie suit."]]},
+  {d:"2026-12-30", title:"Pauline et Jules nous rejoignent", places:["elne","esplanade"],
+   slots:[["Matin","Elne et son cloître roman, ou le marché d'Argelès village."],["Midi","Courses du réveillon : les magasins ferment tôt le 31."],["Après-midi","Arrivée de Pauline et Jules, installation."],["15h–17h","Initiation au rugby pour les enfants sur l'esplanade."],["20h","Premier concert à cinq."]]},
   {d:"2026-12-31", star:true, title:"Saint-Sylvestre", places:["esplanade","figueres"],
    slots:[["Journée","Au choix : Réserve africaine de Sigean (safari en voiture) ou musée Dalí à Figueres. Ou une journée calme à la maison."],["Fin d'après-midi","Préparation du dîner, apéritif à la maison."],["21h","Réveillon sur l'esplanade : DJ et piste de danse en bord de mer."],["Minuit","Feu d'artifice au-dessus de la mer."]],
-   warn:"Le Château royal de Collioure est souvent fermé le 31 décembre ; vérifier les horaires du musée Dalí ce jour-là."},
+   warn:"Le Château royal de Collioure est souvent fermé le 31 décembre ; vérifier les horaires du musée Dalí ce jour-là. Prévoir un conducteur pour le retour après minuit."},
   {d:"2027-01-01", star:true, title:"Premier plouf de l'année", places:["esplanade","larrieu"],
-   slots:[["10h30","Bain du Nouvel An : les courageux à l'eau, les autres en supporters."],["12h","Concert électro lounge sur la plage, chocolat chaud."],["Après-midi","Grasse matinée rattrapée, jeux de société, balade au Mas Larrieu."]],
+   slots:[["10h30","Bain du Nouvel An : les courageux à l'eau, les autres en supporters."],["12h","Concert électro lounge sur la plage, chocolat chaud."],["Après-midi","Grasse matinée rattrapée, jeux de société, balade au bord de la mer."]],
    warn:"Jour férié : Château royal et musée Dalí fermés."},
-  {d:"2027-01-02", title:"Albères ou sentier côtier", places:["valmy","massane","esplanade"],
-   slots:[["Matin","Montée à la chapelle Saint-Laurent-du-Mont depuis Valmy, en famille. Pour Jules et les adultes : la tour de la Massane."],["14h–17h","Slackline et initiation cirque sur l'esplanade."],["20h","Concert du soir."]],
-   warn:"Dernière nuit si le séjour se termine le 2 : départ en fin de matinée à la place."},
-  {d:"2027-01-03", opt:true, title:"Dernier jour", places:["maison","esplanade"],
-   slots:[["Matin","Rangement, ménage, remise des clés."],["Midi","Dernier déjeuner face à la mer, puis route vers Toulouse."]],
-   warn:"Seulement si l'hébergement retenu le permet."}
+  {d:"2027-01-02", title:"Collioure", places:["racou","collioure","esplanade"],
+   slots:[["Matin","Collioure : le port, le clocher, les ruelles. Château royal ouvert de 10 h à 17 h."],["Variante","Aller à pied par le sentier du littoral depuis le Racou (environ 2 h), retour en train ou en bus."],["14h–17h","Slackline et initiation cirque sur l'esplanade."],["Fin de journée","Départ possible vers Toulouse, ou dernière soirée et concert."]],
+   warn:"Départ le 2 au soir ou le 3, selon l'envie et la météo."},
+  {d:"2027-01-03", opt:true, title:"Albères et retour", places:["valmy","massane"],
+   slots:[["Matin","Montée à la chapelle Saint-Laurent-du-Mont depuis Valmy, en famille. Pour Jules et les adultes : la tour de la Massane, si le temps est clair."],["Midi","Rangement, ménage, remise des clés."],["Après-midi","Route vers Toulouse."]],
+   warn:"Si l'on reste jusqu'au 3 janvier."}
 ];
 
 
@@ -512,9 +513,9 @@ const HOUSES = [
    txt:"4 chambres (180, 140 et deux 140), 3 salles d'eau, jardin clos. Linge possible, ménage 80 euros. Lacs et commerces à pied.", ask:"Disponibilité, chauffage, conditions du linge.", url:"https://www.homeexchange.fr/homes/view/2859177"},
   {who:"Jessy et Manu", town:"Elne", dep:"66", lat:42.6000, lon:2.9711, st:"wait", sent:"20 oct.", rank:2, drive:"10 min d'Argelès",
    txt:"Maison de village sur trois niveaux, 160, 140 et canapé-lit avec vidéoprojecteur, 2 salles de bain, sans extérieur. Ménage en option à 100 euros.", ask:"Disponibilité, chauffage, chambre fermée au 1er étage, linge.", url:"https://www.homeexchange.fr/homes/view/2493313"},
-  {who:"Marjorie", town:"Alénya", dep:"66", lat:42.6378, lon:2.9819, st:"wait", sent:"20 oct.", rank:3, drive:"15 min d'Argelès",
+  {who:"Marjorie", dates:"28 déc. – 3 janv., 6 nuits minimum exigées", town:"Alénya", dep:"66", lat:42.6378, lon:2.9819, st:"wait", sent:"20 oct.", rank:3, drive:"15 min d'Argelès",
    txt:"4 chambres dont une suite, 2 salles d'eau, parc pour enfants en face. Cherche en priorité un échange réciproque aux États-Unis ou au Canada.", ask:"GuestPoints acceptés ? Disponibilité, chauffage.", url:"https://www.homeexchange.fr/homes/view/2647719"},
-  {who:"Lucile", town:"Théza", dep:"66", lat:42.6383, lon:2.9506, st:"wait", sent:"20 oct.", rank:4, drive:"15 min d'Argelès",
+  {who:"Lucile", dates:"28 déc. – 3 janv., 6 nuits minimum exigées", town:"Théza", dep:"66", lat:42.6383, lon:2.9506, st:"wait", sent:"20 oct.", rank:4, drive:"15 min d'Argelès",
    txt:"3 chambres, grande salle de jeux, 1 salle de bain. Skate-park et city stade à 3 minutes à pied.", ask:"Disponibilité, répartition des lits, chauffage, linge.", url:"https://www.homeexchange.fr/homes/view/2956929"},
   {who:"Katla", town:"Fitou", dep:"11", lat:42.8938, lon:2.9790, st:"ok", sent:"19 oct.", rank:5, drive:"40 min d'Argelès",
    txt:"Vue mer et étang, sur les hauteurs du village. Partante, pré-approbation expirée puis relancée. Ménage 130 euros.", ask:"Couchage et chauffage toujours inconnus.", url:"https://www.homeexchange.fr/homes/view/2550493"},
@@ -602,7 +603,8 @@ const PACK = {
 };
 
 const RESA = [
-  {id:"maison", t:"Trouver l'hébergement", s:"Quatre demandes envoyées le 20 octobre, deux hôtes disponibles en repli", def:"demande"},
+  {id:"maison", t:"Trouver l'hébergement", s:"Quatre demandes envoyées le 20 octobre, dont deux du 28 décembre au 3 janvier", def:"demande"},
+  {id:"trajet", t:"Trajet de Pauline et Jules le 30", s:"Seconde voiture, ou train jusqu'à Perpignan", def:"afaire"},
   {id:"autres", t:"Prévenir les autres hôtes", s:"Katla, Marine et Rémy, Sabrina et Julien, Nicolas, Florian et Anne-Sophie", def:"afaire"},
   {id:"linge", t:"Linge de maison", s:"Fourni ou à apporter, selon l'hébergement", def:"afaire"},
   {id:"fetes", t:"Programme officiel des fêtes 2026-2027", s:"À consulter début décembre sur le site de la ville", def:"afaire"},
@@ -623,7 +625,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const DOW = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const MON = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 const parseDay = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
-const STAY = new Set(["2026-12-29","2026-12-30","2026-12-31","2027-01-01","2027-01-02"]);
+const STAY = new Set(["2026-12-28","2026-12-29","2026-12-30","2026-12-31","2027-01-01","2027-01-02","2027-01-03"]);
 
 /* Thème */
 (function(){
@@ -850,6 +852,7 @@ function renderTrack(){
       : `<article class="hcard st-${k}">
           <header><h3>${x.rank ? `<span class="mono muted">${x.rank}.</span> ` : ""}${esc(x.who)}</h3><span class="pill ${HST[k].pill}">${HST[k].l}</span></header>
           <span class="where">${esc(x.town)} (${esc(x.dep)}) · ${esc(x.drive)} · contacté le ${esc(x.sent)}</span>
+          <span class="where">Dates demandées : ${esc(x.dates || "29 déc. – 2 janv., 4 nuits")}</span>
           <p>${esc(x.txt)}</p>
           ${x.ask ? `<p class="muted">En attente : ${esc(x.ask)}</p>` : ""}
           <div class="act"><button class="chip" type="button" data-h="${x.i}">Voir sur la carte</button><a href="${x.url}" target="_blank" rel="noopener">Annonce</a></div>
