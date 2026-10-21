@@ -30,6 +30,7 @@
   --ok:#6CC08E; --todo:#EBA45D; --opt:#9DAEC6; --ask:#B99BE0; --tiles:invert(.92) hue-rotate(180deg) brightness(.95) contrast(.9) saturate(.6); color-scheme:dark; }
 
 *,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%; scroll-padding-top:calc(var(--nav-h) + 14px); scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
 body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:1.03rem; line-height:1.55; overflow-x:hidden}
@@ -246,6 +247,30 @@ tr.us td{background:var(--accent-soft)}
 .pill.wait{color:var(--sea)} .pill.no{color:var(--ink-2)}
 .ref{color:var(--accent)}
 
+/* Galerie de la maison */
+.gallery{display:grid; grid-auto-flow:column; grid-auto-columns:minmax(200px, 23%); gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px}
+@media (max-width:640px){ .gallery{grid-auto-columns:72%} }
+.gallery figure{margin:0; scroll-snap-align:start; display:grid; gap:4px; min-width:0; align-content:start}
+.gallery button{padding:0; border:0; background:none; cursor:zoom-in; border-radius:var(--radius); overflow:hidden; display:block}
+.gallery img{display:block; width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform .25s}
+@media (hover:hover){ .gallery button:hover img{transform:scale(1.03)} }
+@media (prefers-reduced-motion: reduce){ .gallery img{transition:none} }
+.gallery figcaption{font-size:.84rem; color:var(--ink-2)}
+.vlist{list-style:none; margin:8px 0 0; padding:0; display:grid; gap:8px}
+.vlist li{display:grid; grid-template-columns:120px 1fr; gap:10px}
+@media (max-width:420px){ .vlist li{grid-template-columns:1fr; gap:0} }
+.vlist b{font-family:var(--f-mono); font-weight:500; font-size:.84rem; color:var(--accent); padding-top:2px}
+.hist{margin-top:22px; border-top:1px solid var(--rule); padding-top:14px}
+.hist summary{cursor:pointer; font-family:var(--f-display); font-size:1.3rem}
+.lightbox{position:fixed; inset:0; z-index:2000; background:rgba(8,12,24,.92); display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:8px;
+  padding:max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
+.lightbox figure{margin:0; display:grid; gap:8px; justify-items:center; min-width:0}
+.lightbox img{max-width:100%; max-height:82vh; object-fit:contain; border-radius:6px}
+.lightbox figcaption{color:#EEF1FA; font-size:.95rem}
+.lb-nav{background:rgba(255,255,255,.12); color:#fff; border:0; border-radius:50%; width:44px; height:44px; font-size:1.8rem; line-height:1; cursor:pointer}
+.lb-close{position:absolute; top:max(14px, env(safe-area-inset-top, 0px)); right:max(14px, env(safe-area-inset-right, 0px)); background:rgba(255,255,255,.12); color:#fff; border:0; border-radius:6px; padding:6px 12px; font:inherit; cursor:pointer}
+.st-conf{--st:var(--accent)}
+
 footer{margin-top:44px; border-top:1px solid var(--rule); padding-block:20px 40px; color:var(--ink-2); font-size:.8rem}
 footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
 .bonany{font-family:var(--f-display); font-size:1.4rem; color:var(--accent); margin-bottom:10px}
@@ -256,7 +281,7 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
   <div class="wrap">
     <div class="eyebrow">Côte Vermeille · Saint-Sylvestre 2026</div>
     <h1>Argelès,<br><em>Nouvel An</em> à cinq</h1>
-    <p class="lede">Une maison près de la côte, les Albères en toile de fond et les Réveillons de la Plage d'Argelès pour fêter minuit. Carnet de route du séjour, du 28 ou 29 décembre au 2 ou 3 janvier.</p>
+    <p class="lede">Une maison de village à Théza, la côte à un quart d'heure et les Réveillons de la Plage d'Argelès pour fêter minuit. Carnet de route du séjour, du lundi 28 décembre au dimanche 3 janvier.</p>
     <div class="countrow" id="countdown" aria-live="polite"></div>
     <div class="crew" aria-label="Voyageurs"><span>Pauline</span><span>Sébastien</span><span>Jules</span><span>Hélia</span><span>Noé</span></div>
   </div>
@@ -274,25 +299,60 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
 <main>
 <section id="maison" class="wrap">
   <div class="sec-h">
-    <h2>L'hébergement</h2>
-    <p>Suivi des demandes HomeExchange : 4 nuits du 29 décembre au 2 janvier, ou 6 nuits du 28 décembre au 3 janvier pour les hôtes qui l'exigent. La maison de Valérie à Argelès n'est plus disponible depuis le 19 octobre : elle a accepté une autre demande.</p>
+    <span class="pill ok" style="justify-self:start">Échange confirmé</span>
+    <h2>La casa Bonita, à Théza</h2>
+    <p>La maison de Lucile, au cœur du village, du lundi 28 décembre au dimanche 3 janvier (6 nuits). Échange HomeExchange accepté le 21 octobre.</p>
   </div>
-  <div class="track-sum" id="tracksum"></div>
-  <div class="track">
-    <div>
-      <div class="mapctl" role="group" aria-label="Zone affichée" id="osmctl"></div>
-      <div class="osm" id="osm" role="region" aria-label="Carte OpenStreetMap des maisons contactées"></div>
-      <p class="tilenote" id="tilenote">Positions approximatives, au centre de chaque commune. L'étoile rouge marque l'esplanade d'Argelès, lieu du réveillon.</p>
+  <div class="gallery" id="gallery" aria-label="Photos de la maison"></div>
+  <div class="house" style="margin-top:16px">
+    <div class="panel">
+      <h3>La maison</h3>
+      <dl class="facts">
+        <dt>Adresse</dt><dd><span id="addr">6 rue de l'Église, 66200 Théza</span> <button class="chip" type="button" id="copyaddr" style="margin-left:4px">Copier</button><br><a href="https://www.openstreetmap.org/search?query=6%20rue%20de%20l%27%C3%89glise%2C%20Th%C3%A9za" target="_blank" rel="noopener">Ouvrir dans OpenStreetMap</a></dd>
+        <dt>Dates</dt><dd>Du lundi 28 décembre au dimanche 3 janvier. Séb, Hélia et Noé arrivent le 28, Pauline et Jules le 30. Départ le 2 au soir ou le 3, selon l'envie et la météo.</dd>
+        <dt>Pièces</dt><dd>Grand salon et salle à manger avec la cuisine, 3 chambres à l'étage, une grande salle de jeux avec télévision, une salle de bain (baignoire, douche, double vasque), WC indépendant, buanderie, garage.</dd>
+        <dt>Dehors</dt><dd>Jardin, grande terrasse, pergola et table pour dix, panier de basket. La piscine sécurisée sera fermée en hiver.</dd>
+        <dt>À vérifier</dt><dd>Répartition des lits, chauffage, linge de maison, heure d'arrivée et remise des clés.</dd>
+      </dl>
     </div>
-    <div class="hlist" id="hlist"></div>
+    <div class="panel">
+      <h3>Le village</h3>
+      <ul class="vlist">
+        <li><b>3 min à pied</b>Parc, city stade et skate-park, pour Jules comme pour Hélia et Noé.</li>
+        <li><b>Lundi soir</b>Petit marché de producteurs, le soir même de notre arrivée.</li>
+        <li><b>Mercredi matin</b>Marché, le 30 décembre : idéal pour les courses du réveillon.</li>
+        <li><b>Sur place</b>Café et bibliothèque. Supermarchés à Elne, à 5 minutes.</li>
+        <li><b>À vélo</b>Pistes cyclables jusqu'à la mer.</li>
+        <li><b>En voiture</b>Elne 5 min, Perpignan et Argelès 15 min, Collioure 25 min.</li>
+      </ul>
+    </div>
   </div>
-  <p class="note">Une fois un échange confirmé, prévenir les autres hôtes. Hors d'Argelès, prévoir un conducteur pour le retour du réveillon.</p>
+
+  <details class="hist" id="hist">
+    <summary>Historique des demandes HomeExchange</summary>
+    <div class="track-sum" id="tracksum" style="margin-top:12px"></div>
+    <div class="track">
+      <div>
+        <div class="mapctl" role="group" aria-label="Zone affichée" id="osmctl"></div>
+        <div class="osm" id="osm" role="region" aria-label="Carte OpenStreetMap des maisons contactées"></div>
+        <p class="tilenote" id="tilenote">Positions approximatives, au centre de chaque commune. L'étoile rouge marque l'esplanade d'Argelès, lieu du réveillon.</p>
+      </div>
+      <div class="hlist" id="hlist"></div>
+    </div>
+  </details>
 </section>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo agrandie">
+  <button class="lb-close" type="button" id="lbclose" aria-label="Fermer">Fermer</button>
+  <button class="lb-nav prev" type="button" id="lbprev" aria-label="Photo précédente">&#8249;</button>
+  <figure><img id="lbimg" alt=""><figcaption id="lbcap"></figcaption></figure>
+  <button class="lb-nav next" type="button" id="lbnext" aria-label="Photo suivante">&#8250;</button>
+</div>
 
 <section id="programme" class="wrap">
   <div class="sec-h">
     <h2>Programme jour par jour</h2>
-    <p>Une proposition souple : une sortie par jour au plus, et les fêtes d'Argelès en fin d'après-midi. Sébastien, Hélia et Noé arrivent les premiers, le 28 ou le 29 selon la maison ; Pauline et Jules les rejoignent le 30. Retour le 2 ou le 3 janvier, selon l'envie et la météo. Les jours en pointillés dépendent de l'hébergement retenu.</p>
+    <p>Une proposition souple : une sortie par jour au plus, et les fêtes d'Argelès en fin d'après-midi. Séb, Hélia et Noé arrivent à Théza le 28 ; Pauline et Jules les rejoignent le 30. Retour le 2 au soir ou le 3, selon l'envie et la météo.</p>
   </div>
   <div class="days" id="days"></div>
   <p class="note">Les horaires des fêtes reprennent l'édition 2025-2026, la seule publiée à ce jour. Le programme 2026-2027 sort en général début décembre sur le site de la ville.</p>
@@ -345,7 +405,7 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
 <section id="escapades" class="wrap">
   <div class="sec-h">
     <h2>Escapades autour d'Argelès</h2>
-    <p>Distances et temps depuis Argelès, à titre indicatif. Les fermetures signalées concernent nos dates.</p>
+    <p>Distances et temps depuis la maison de Théza, à titre indicatif. Les fermetures signalées concernent nos dates.</p>
   </div>
   <div class="filters" role="group" aria-label="Filtrer les escapades" id="filters"></div>
   <div class="trips" id="trips"></div>
@@ -407,10 +467,10 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
     <div class="panel">
       <h3>Trajet</h3>
       <ul>
-        <li>Toulouse – Argelès : environ 230 km, 2 h 30 par l'A61 puis l'A9.</li>
-        <li>Pauline et Jules arrivent le 30 : prévoir une seconde voiture, ou le train jusqu'à Perpignan puis une navette.</li>
+        <li>Toulouse – Théza : environ 210 km, 2 h 15 par l'A61 puis l'A9, sortie Perpignan-Sud.</li>
+        <li>Pauline et Jules arrivent le 30 : seconde voiture, ou train jusqu'à Perpignan, à 15 minutes de la maison.</li>
         <li>Sortie Perpignan-Sud, puis la voie rapide vers Argelès.</li>
-        <li>Prévoir un arrêt à Narbonne ou à la Réserve de Sigean pour couper le trajet.</li>
+        <li>Théza – Argelès : 15 minutes ; prévoir un conducteur pour le retour du réveillon.</li>
         <li>Pour l'Espagne : carte d'identité ou passeport pour chacun, enfants compris.</li>
       </ul>
     </div>
@@ -458,7 +518,7 @@ const ARRIVAL = "2026-12-28T15:00:00+01:00";
 const MIDNIGHT = "2027-01-01T00:00:00+01:00";
 
 const PLACES = {
-  maison:   {name:"Villeneuve-de-la-Raho", lat:42.637, lon:2.921, home:true, txt:"Piste d'hébergement prioritaire, chez Auriane : à 5 minutes à pied des lacs, à environ 20 minutes d'Argelès. À confirmer."},
+  maison:   {name:"La maison, Théza", lat:42.6383, lon:2.9506, home:true, txt:"La casa Bonita, chez Lucile, 6 rue de l'Église. Au cœur du village : parc, city stade et skate-park à 3 minutes, marché le lundi soir et le mercredi matin."},
   esplanade:{name:"Esplanade Charles-Trenet", lat:42.555, lon:3.044, txt:"Argelès-Plage, face à la mer : Réveillons de la Plage, concerts, réveillon du 31 et bain du 1er janvier."},
   village:  {name:"Argelès village", lat:42.547, lon:3.025, txt:"Centre ancien, marchés, commerces, cinéma et médiathèque."},
   larrieu:  {name:"Réserve du Mas Larrieu", lat:42.570, lon:3.040, txt:"Réserve naturelle à l'embouchure du Tech : dunes, lagunes et oiseaux, balade à plat accessible aux enfants."},
@@ -477,25 +537,24 @@ const PLACES = {
 };
 
 const DAYS = [
-  {d:"2026-12-28", opt:true, title:"Arrivée de Séb, Hélia et Noé", places:["maison","village"],
-   slots:[["Après-midi","Route depuis Toulouse, installation, premières courses."],["Soir","Dîner à la maison, soirée calme."]],
-   warn:"Seulement pour les maisons louées du 28 décembre au 3 janvier (Lucile, Marjorie). Sinon, arrivée le 29."},
-  {d:"2026-12-29", title:"À trois, entre plage et poneys", places:["larrieu","esplanade","village"],
-   slots:[["Matin","Arrivée si la maison est louée à partir du 29. Sinon, balade dans les dunes et les lagunes du Mas Larrieu."],["15h–19h","Animations enfants sur l'esplanade : balades à poney, kart à voile, jeux d'arcade."],["16h30","Coucher du soleil sur la plage."],["20h","Concert gratuit sur l'esplanade, si l'énergie suit."]]},
-  {d:"2026-12-30", title:"Pauline et Jules nous rejoignent", places:["elne","esplanade"],
-   slots:[["Matin","Elne et son cloître roman, ou le marché d'Argelès village."],["Midi","Courses du réveillon : les magasins ferment tôt le 31."],["Après-midi","Arrivée de Pauline et Jules, installation."],["15h–17h","Initiation au rugby pour les enfants sur l'esplanade."],["20h","Premier concert à cinq."]]},
+  {d:"2026-12-28", title:"Arrivée à Théza", places:["maison"],
+   slots:[["Après-midi","Route depuis Toulouse, environ 2 h 15. Installation chez Lucile."],["Fin de journée","Premier tour du village : le parc et le skate-park à 3 minutes."],["Soir","Petit marché de producteurs du lundi soir, puis dîner à la maison."]]},
+  {d:"2026-12-29", title:"À trois, entre plage et poneys", places:["larrieu","esplanade","maison"],
+   slots:[["Matin","Balade dans les dunes et les lagunes du Mas Larrieu, ou vélo sur les pistes cyclables vers la mer."],["15h–19h","Animations enfants sur l'esplanade d'Argelès : balades à poney, kart à voile, jeux d'arcade."],["16h30","Coucher du soleil sur la plage."],["20h","Concert gratuit sur l'esplanade, si l'énergie suit."]]},
+  {d:"2026-12-30", title:"Pauline et Jules nous rejoignent", places:["maison","elne","esplanade"],
+   slots:[["Matin","Marché du mercredi à Théza, puis courses du réveillon à Elne : les magasins ferment tôt le 31."],["Après-midi","Arrivée de Pauline et Jules, installation."],["15h–17h","Initiation au rugby pour les enfants sur l'esplanade d'Argelès."],["20h","Premier concert à cinq, ou soirée jeux à la maison."]]},
   {d:"2026-12-31", star:true, title:"Saint-Sylvestre", places:["esplanade","figueres"],
-   slots:[["Journée","Au choix : Réserve africaine de Sigean (safari en voiture) ou musée Dalí à Figueres. Ou une journée calme à la maison."],["Fin d'après-midi","Préparation du dîner, apéritif à la maison."],["21h","Réveillon sur l'esplanade : DJ et piste de danse en bord de mer."],["Minuit","Feu d'artifice au-dessus de la mer."]],
-   warn:"Le Château royal de Collioure est souvent fermé le 31 décembre ; vérifier les horaires du musée Dalí ce jour-là. Prévoir un conducteur pour le retour après minuit."},
+   slots:[["Journée","Au choix : Réserve africaine de Sigean (safari en voiture) ou musée Dalí à Figueres. Ou une journée calme au village."],["Fin d'après-midi","Préparation du dîner, apéritif à la maison."],["21h","Réveillon sur l'esplanade d'Argelès : DJ et piste de danse en bord de mer."],["Minuit","Feu d'artifice au-dessus de la mer."]],
+   warn:"Théza est à 15 minutes d'Argelès : prévoir un conducteur pour le retour après minuit. Le Château royal de Collioure est souvent fermé le 31."},
   {d:"2027-01-01", star:true, title:"Premier plouf de l'année", places:["esplanade","larrieu"],
-   slots:[["10h30","Bain du Nouvel An : les courageux à l'eau, les autres en supporters."],["12h","Concert électro lounge sur la plage, chocolat chaud."],["Après-midi","Grasse matinée rattrapée, jeux de société, balade au bord de la mer."]],
+   slots:[["10h30","Bain du Nouvel An à Argelès : les courageux à l'eau, les autres en supporters."],["12h","Concert électro lounge sur la plage, chocolat chaud."],["Après-midi","Grasse matinée rattrapée, jeux dans la salle de jeux, balade au bord de la mer."]],
    warn:"Jour férié : Château royal et musée Dalí fermés."},
   {d:"2027-01-02", title:"Collioure", places:["racou","collioure","esplanade"],
    slots:[["Matin","Collioure : le port, le clocher, les ruelles. Château royal ouvert de 10 h à 17 h."],["Variante","Aller à pied par le sentier du littoral depuis le Racou (environ 2 h), retour en train ou en bus."],["14h–17h","Slackline et initiation cirque sur l'esplanade."],["Fin de journée","Départ possible vers Toulouse, ou dernière soirée et concert."]],
    warn:"Départ le 2 au soir ou le 3, selon l'envie et la météo."},
-  {d:"2027-01-03", opt:true, title:"Albères et retour", places:["valmy","massane"],
-   slots:[["Matin","Montée à la chapelle Saint-Laurent-du-Mont depuis Valmy, en famille. Pour Jules et les adultes : la tour de la Massane, si le temps est clair."],["Midi","Rangement, ménage, remise des clés."],["Après-midi","Route vers Toulouse."]],
-   warn:"Si l'on reste jusqu'au 3 janvier."}
+  {d:"2027-01-03", title:"Albères et retour", places:["valmy","massane","maison"],
+   slots:[["Matin","Montée à la chapelle Saint-Laurent-du-Mont depuis Valmy, en famille. Pour Jules et les adultes : la tour de la Massane, si le temps est clair."],["Midi","Rangement, ménage, remise des clés à Théza."],["Après-midi","Route vers Toulouse."]],
+   warn:"Si l'on n'est pas reparti le 2 au soir."}
 ];
 
 
@@ -505,8 +564,8 @@ const HOUSES = [
    txt:"4 chambres (180, 140 et deux 140), 3 salles d'eau, jardin clos. Linge possible, ménage 80 euros. Lacs et commerces à pied.", ask:"Disponibilité, chauffage, conditions du linge.", url:"https://www.homeexchange.fr/homes/view/2859177"},
   {who:"Marjorie", dates:"28 déc. – 3 janv., 6 nuits minimum exigées", town:"Alénya", dep:"66", lat:42.6378, lon:2.9819, st:"wait", sent:"20 oct.", rank:2, drive:"15 min d'Argelès",
    txt:"4 chambres dont une suite, 2 salles d'eau, parc pour enfants en face. Cherche en priorité un échange réciproque aux États-Unis ou au Canada.", ask:"GuestPoints acceptés ? Disponibilité, chauffage.", url:"https://www.homeexchange.fr/homes/view/2647719"},
-  {who:"Lucile", dates:"28 déc. – 3 janv., 6 nuits minimum exigées", town:"Théza", dep:"66", lat:42.6383, lon:2.9506, st:"wait", sent:"20 oct.", rank:3, drive:"15 min d'Argelès",
-   txt:"3 chambres, grande salle de jeux, 1 salle de bain. Skate-park et city stade à 3 minutes à pied.", ask:"Disponibilité, répartition des lits, chauffage, linge.", url:"https://www.homeexchange.fr/homes/view/2956929"},
+  {who:"Lucile", conf:true, dates:"28 déc. – 3 janv., 6 nuits minimum exigées", town:"Théza", dep:"66", lat:42.6383, lon:2.9506, st:"conf", sent:"20 oct.", rank:3, drive:"15 min d'Argelès",
+   txt:"3 chambres, grande salle de jeux, 1 salle de bain. Skate-park et city stade à 3 minutes à pied.", ask:"Répartition des lits, chauffage, linge.", url:"https://www.homeexchange.fr/homes/view/2956929"},
   {who:"Katla", town:"Fitou", dep:"11", lat:42.8938, lon:2.9790, st:"ok", sent:"19 oct.", rank:4, drive:"40 min d'Argelès",
    txt:"Vue mer et étang, sur les hauteurs du village. Partante, pré-approbation expirée puis relancée. Ménage 130 euros.", ask:"Couchage et chauffage toujours inconnus.", url:"https://www.homeexchange.fr/homes/view/2550493"},
   {who:"Marine et Rémy", town:"Pia", dep:"66", lat:42.7450, lon:2.9200, st:"ok", sent:"19 oct.", rank:5, drive:"30 min d'Argelès",
@@ -525,10 +584,11 @@ const HOUSES = [
   {who:"Ot", town:"Vilamaniscle", dep:"Espagne", lat:42.3756, lon:3.0681, st:"no", why:"Échange réciproque exigé en décembre", url:"https://www.homeexchange.fr/homes/view/3101032"}
 ];
 const HST = {
-  wait:{l:"Demande envoyée", g:"Demandes en attente de réponse", pill:"wait", col:"--sea"},
-  ok:{l:"Disponible", g:"Hôtes disponibles, en repli", pill:"ok", col:"--ok"},
-  hold:{l:"En suspens", g:"En suspens", pill:"todo", col:"--todo"},
-  none:{l:"Sans réponse", g:"Sans réponse", pill:"opt", col:"--opt"},
+  conf:{l:"Confirmé", g:"Échange confirmé", pill:"ok", col:"--accent"},
+  wait:{l:"Demande envoyée", g:"Demandes à annuler", pill:"wait", col:"--sea"},
+  ok:{l:"Disponible", g:"Hôtes disponibles, à prévenir", pill:"ok", col:"--ok"},
+  hold:{l:"En suspens", g:"En suspens, à prévenir", pill:"todo", col:"--todo"},
+  none:{l:"Sans réponse", g:"Sans réponse, à prévenir", pill:"opt", col:"--opt"},
   no:{l:"Écartée", g:"Pistes fermées", pill:"no", col:"--ink-2"}
 };
 const ESPLANADE = [42.555, 3.044];
@@ -545,40 +605,40 @@ const FEST = [
 ];
 
 const TRIPS = [
-  {name:"Collioure", place:"collioure", dist:"8 km · 12 min", tags:["famille","patrimoine","ville"],
+  {name:"Collioure", place:"collioure", dist:"25 km · 25 min", tags:["famille","patrimoine","ville"],
    txt:"Le port des peintres fauves, son clocher-phare et le Château royal. Parfait pour une matinée, avec glace ou chocolat chaud sur le quai.",
    hours:"Château royal : 10h–17h en hiver.", closed:"Château fermé le 1er janvier, souvent aussi le 31 décembre."},
-  {name:"Sentier du littoral", place:"racou", dist:"Départ à 3 km · 2 h à pied", tags:["famille","nature","gratuit"],
+  {name:"Sentier du littoral", place:"racou", dist:"Départ à 18 km · 2 h à pied", tags:["famille","nature","gratuit"],
    txt:"Du Racou à Collioure par les criques et les falaises, environ 6 km. Retour en train ou en bus. Bien abrité les jours de tramontane.",
    hours:"Libre accès.", closed:""},
-  {name:"Réserve africaine de Sigean", place:null, dist:"70 km · 50 min", tags:["petits","animaux","journée"],
+  {name:"Réserve africaine de Sigean", place:null, dist:"60 km · 45 min", tags:["petits","animaux","journée"],
    txt:"Safari en voiture puis parc à pied : lions, girafes, rhinocéros, éléphants. Une valeur sûre pour Hélia et Noé.",
    hours:"Hiver : safari 10h–16h, parc à pied jusqu'à 17h. Adulte 34 €, gratuit avant 4 ans.", closed:"Secteur venté en hiver : regarder la météo avant de partir."},
-  {name:"Théâtre-musée Dalí", place:"figueres", dist:"50 km · 45 min", tags:["ados","culture","espagne","pluie"],
+  {name:"Théâtre-musée Dalí", place:"figueres", dist:"55 km · 45 min", tags:["ados","culture","espagne","pluie"],
    txt:"Le musée conçu par Dalí lui-même : voiture sous la pluie, salle Mae West, coupole géodésique. Très visuel, il plaît autant aux enfants qu'à Jules.",
    hours:"Entrée en ligne dès 18,50 €. Gratuit avant 8 ans.", closed:"Fermé les 25 décembre et 1er janvier."},
-  {name:"Réserve du Mas Larrieu", place:"larrieu", dist:"4 km · 10 min", tags:["petits","nature","gratuit"],
+  {name:"Réserve du Mas Larrieu", place:"larrieu", dist:"12 km · 15 min", tags:["petits","nature","gratuit"],
    txt:"Dunes, lagunes et oiseaux à l'embouchure du Tech, sur sentiers plats. Idéal le 1er janvier, quand tout est fermé.",
    hours:"Libre accès.", closed:""},
-  {name:"Chapelle Saint-Laurent-du-Mont", place:"valmy", dist:"3 km · départ de Valmy", tags:["famille","nature","gratuit"],
+  {name:"Chapelle Saint-Laurent-du-Mont", place:"valmy", dist:"Départ à 15 km · 2 h", tags:["famille","nature","gratuit"],
    txt:"Montée dans les chênes-lièges des Albères jusqu'à une chapelle avec vue sur la plaine et la mer. Boucle d'environ 2 heures.",
    hours:"Libre accès.", closed:""},
-  {name:"Tour de la Massane", place:"massane", dist:"Départ à 4 km · 4 à 5 h", tags:["ados","nature","sportif"],
+  {name:"Tour de la Massane", place:"massane", dist:"Départ à 15 km · 4 à 5 h", tags:["ados","nature","sportif"],
    txt:"La grande randonnée des Albères jusqu'à une tour de guet médiévale à près de 800 m. Pour Jules et les adultes, par temps clair.",
    hours:"Libre accès, environ 700 m de dénivelé.", closed:"À éviter par forte tramontane."},
-  {name:"Perpignan", place:"perpignan", dist:"25 km · 25 min", tags:["ville","patrimoine","pluie"],
+  {name:"Perpignan", place:"perpignan", dist:"12 km · 15 min", tags:["ville","patrimoine","pluie"],
    txt:"Le Castillet, le Palais des rois de Majorque et les ruelles du centre ancien. Une bonne solution de repli un jour de pluie.",
    hours:"Horaires d'hiver à vérifier.", closed:"Monuments fermés le 1er janvier."},
-  {name:"Céret", place:"ceret", dist:"30 km · 35 min", tags:["culture","patrimoine","pluie"],
+  {name:"Céret", place:"ceret", dist:"30 km · 30 min", tags:["culture","patrimoine","pluie"],
    txt:"Le vieux pont du Diable, les platanes et le musée d'art moderne, qui garde des œuvres de Picasso, Chagall et Matisse.",
    hours:"Horaires d'hiver à vérifier.", closed:""},
-  {name:"Elne", place:"elne", dist:"8 km · 12 min", tags:["patrimoine","culture"],
-   txt:"Une ville perchée sur sa colline et un cloître roman remarquable, pour une heure de visite tranquille.",
+  {name:"Elne", place:"elne", dist:"3 km · 5 min", tags:["patrimoine","culture"],
+   txt:"La ville voisine, perchée sur sa colline, avec un cloître roman remarquable. Supermarchés pour les courses.",
    hours:"Horaires d'hiver à vérifier.", closed:""},
-  {name:"Port-Vendres et Banyuls", place:"banyuls", dist:"15 à 20 km · 25 min", tags:["famille","ville","nature"],
+  {name:"Port-Vendres et Banyuls", place:"banyuls", dist:"30 km · 30 min", tags:["famille","ville","nature"],
    txt:"Le port de pêche, puis Banyuls et ses vignes en terrasses au-dessus de la mer. Belle route en corniche.",
    hours:"Libre accès.", closed:""},
-  {name:"Cadaqués", place:"cadaques", dist:"80 km · 1 h 20", tags:["espagne","ville","journée"],
+  {name:"Cadaqués", place:"cadaques", dist:"85 km · 1 h 20", tags:["espagne","ville","journée"],
    txt:"Le village blanc du cap de Creus, au bout d'une route lente et superbe. À garder pour une journée sans autre programme.",
    hours:"Libre accès.", closed:"Long trajet aller-retour pour un séjour court."}
 ];
@@ -586,7 +646,7 @@ const TRIPS = [
 const FILTERS = {all:"Tout", petits:"Pour Hélia et Noé", ados:"Pour Jules", gratuit:"Gratuit", pluie:"Si temps gris", espagne:"En Espagne"};
 
 const PACK = {
-  "Linge (si non fourni)":["Draps 160 × 2 (housse et dessus)","Drap 140 pour Jules","Drap 90 pour l'appoint","Taies d'oreiller × 6","Serviettes de toilette × 5","Torchons et linge de cuisine"],
+  "Linge (si Lucile ne le fournit pas)":["Draps pour 3 lits doubles (housses et dessus)","Taies d'oreiller × 6","Serviettes de toilette × 5","Torchons et linge de cuisine"],
   "Bain du 1er janvier":["Maillots de bain","Peignoirs ou ponchos","Chaussons de plage","Déguisements, pour les plus motivés","Thermos pour le chocolat chaud"],
   "Hiver sur la côte":["Bonnets et gants pour le soir du 31","Coupe-vent contre la tramontane","Polaires","Chaussures de marche"],
   "Papiers et voiture":["Cartes d'identité ou passeports, enfants compris","Carte du badge de péage","Chargeurs et batterie externe"],
@@ -594,10 +654,10 @@ const PACK = {
 };
 
 const RESA = [
-  {id:"maison", t:"Trouver l'hébergement", s:"Quatre demandes envoyées le 20 octobre, dont deux du 28 décembre au 3 janvier", def:"demande"},
+  {id:"theza", t:"Échange chez Lucile, à Théza", s:"Du 28 décembre au 3 janvier, accepté le 21 octobre", def:"confirme"},
+  {id:"lucile", t:"Questions à Lucile", s:"Lits, chauffage, linge, heure d'arrivée et remise des clés", def:"afaire"},
   {id:"trajet", t:"Trajet de Pauline et Jules le 30", s:"Seconde voiture, ou train jusqu'à Perpignan", def:"afaire"},
-  {id:"autres", t:"Prévenir les autres hôtes", s:"Katla, Marine et Rémy, Sabrina et Julien, Nicolas, Florian et Anne-Sophie", def:"afaire"},
-  {id:"linge", t:"Linge de maison", s:"Fourni ou à apporter, selon l'hébergement", def:"afaire"},
+  {id:"autres2", t:"Prévenir les autres hôtes", s:"Auriane, Marjorie, Katla, Marine et Rémy, Sabrina et Julien, Nicolas, Florian et Anne-Sophie", def:"afaire"},
   {id:"fetes", t:"Programme officiel des fêtes 2026-2027", s:"À consulter début décembre sur le site de la ville", def:"afaire"},
   {id:"sigean", t:"Billets Réserve de Sigean", s:"Achat en ligne", def:"optionnel"},
   {id:"dali", t:"Billets musée Dalí", s:"Créneau horaire en ligne", def:"optionnel"},
@@ -707,7 +767,7 @@ const VIEWS = {
 };
 /* Position des étiquettes : r = à droite, l = à gauche, décalage vertical en px ; null = pas d'étiquette */
 const LBL = {
-  near:{maison:["r",4], esplanade:["r",4], village:["l",4], larrieu:["r",4], racou:["l",14], valmy:["l",4], massane:["r",4], collioure:["r",-6], portvendres:["r",12], banyuls:["l",4], elne:["r",4], stcyprien:["r",4]},
+  near:{maison:["r",-4], esplanade:["r",4], village:["l",4], larrieu:["r",4], racou:["l",14], valmy:["l",4], massane:["r",4], collioure:["r",-6], portvendres:["r",12], banyuls:["l",4], elne:["l",8], stcyprien:["r",4]},
   wide:{maison:["l",4], esplanade:null, village:["l",4], larrieu:null, racou:null, valmy:null, massane:null, collioure:["r",4], portvendres:null, banyuls:["r",4], elne:["l",4], stcyprien:["r",4], perpignan:["r",4], ceret:["r",4], figueres:["r",4], cadaques:["l",4]}
 };
 let view = "near";
@@ -789,7 +849,7 @@ async function liveWeather(){
     return;
   }
   try {
-    const url = "https://api.open-meteo.com/v1/forecast?latitude=42.546&longitude=3.024&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Europe%2FParis&forecast_days=16";
+    const url = "https://api.open-meteo.com/v1/forecast?latitude=42.638&longitude=2.951&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Europe%2FParis&forecast_days=16";
     const r = await fetch(url); if (!r.ok) throw 0; const j = await r.json();
     const CODE = c => c === 0 ? "Soleil" : c <= 2 ? "Éclaircies" : c === 3 ? "Couvert" : c <= 48 ? "Brouillard" : c <= 57 ? "Bruine" : c <= 67 ? "Pluie" : c <= 77 ? "Neige" : c <= 82 ? "Averses" : "Orages";
     const rows = j.daily.time.map((t,i) => ({t, c:j.daily.weather_code[i], mx:j.daily.temperature_2m_max[i], mn:j.daily.temperature_2m_min[i], w:j.daily.wind_speed_10m_max[i]}))
@@ -832,20 +892,20 @@ $("#resa").addEventListener("change", e => { const k = e.target.dataset.r; if (!
 const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim() || "#888";
 function renderTrack(){
   const n = k => HOUSES.filter(h => h.st === k).length;
-  $("#tracksum").innerHTML = ["wait","ok","hold","none","no"].map(k => `<span class="pill ${HST[k].pill}">${n(k)} · ${HST[k].l.toLowerCase()}</span>`).join("");
+  $("#tracksum").innerHTML = ["conf","wait","ok","hold","none","no"].map(k => `<span class="pill ${HST[k].pill}">${n(k)} · ${HST[k].l.toLowerCase()}</span>`).join("");
   let h = "";
-  for (const k of ["wait","ok","hold","none","no"]) {
+  for (const k of ["conf","wait","ok","hold","none","no"]) {
     const list = HOUSES.map((x,i) => ({...x, i})).filter(x => x.st === k).sort((a,b) => (a.rank||99) - (b.rank||99));
     if (!list.length) continue;
     h += `<div class="hgroup">${HST[k].g}</div>`;
     h += list.map(x => k === "no"
       ? `<article class="hcard closed st-no"><header><h3>${esc(x.who)}</h3><span class="where">${esc(x.town)} (${esc(x.dep)})</span></header><p>${esc(x.why)}</p></article>`
       : `<article class="hcard st-${k}">
-          <header><h3>${x.rank ? `<span class="mono muted">${x.rank}.</span> ` : ""}${esc(x.who)}</h3><span class="pill ${HST[k].pill}">${HST[k].l}</span></header>
+          <header><h3>${esc(x.who)}</h3><span class="pill ${HST[k].pill}">${HST[k].l}</span></header>
           <span class="where">${esc(x.town)} (${esc(x.dep)}) · ${esc(x.drive)} · contacté le ${esc(x.sent)}</span>
-          <span class="where">Dates demandées : ${esc(x.dates || "29 déc. – 2 janv., 4 nuits")}</span>
+          <span class="where">${k === "conf" ? "Dates" : "Dates demandées"} : ${esc(x.dates || "29 déc. – 2 janv., 4 nuits")}</span>
           <p>${esc(x.txt)}</p>
-          ${x.ask ? `<p class="muted">En attente : ${esc(x.ask)}</p>` : ""}
+          ${x.ask ? `<p class="muted">${k === "conf" ? "À préciser" : "En attente"} : ${esc(x.ask)}</p>` : ""}
           <div class="act"><button class="chip" type="button" data-h="${x.i}">Voir sur la carte</button><a href="${x.url}" target="_blank" rel="noopener">Annonce</a></div>
         </article>`).join("");
   }
@@ -873,7 +933,7 @@ function initOSM(){
   L.marker(ESPLANADE, {icon:star, keyboard:false}).addTo(osm).bindPopup("<b>Esplanade Charles-Trenet</b><br>Réveillon et feu d'artifice à minuit, bain du 1er janvier.");
   HOUSES.forEach((x, i) => {
     const c = tok(HST[x.st].col);
-    const m = L.circleMarker([x.lat, x.lon], {radius: x.st === "no" ? 6 : 9, color: tok("--surface"), weight:2, fillColor:c, fillOpacity: x.st === "no" ? .55 : .95})
+    const m = L.circleMarker([x.lat, x.lon], {radius: x.st === "no" ? 6 : x.st === "conf" ? 12 : 9, color: tok("--surface"), weight:2, fillColor:c, fillOpacity: x.st === "no" ? .55 : .95})
       .addTo(osm)
       .bindTooltip(`${x.who} · ${x.town}`, {direction:"top", offset:[0,-8]})
       .bindPopup(`<b>${esc(x.who)}</b><br>${esc(x.town)} (${esc(x.dep)})<br><span style="color:${c}">${HST[x.st].l}</span>${x.st === "no" ? ` · ${esc(x.why)}` : ` · ${esc(x.drive)}`}<br><a href="${x.url}" target="_blank" rel="noopener">Voir l'annonce</a> · <a href="https://www.openstreetmap.org/?mlat=${x.lat}&mlon=${x.lon}#map=13/${x.lat}/${x.lon}" target="_blank" rel="noopener">OpenStreetMap</a>`);
@@ -890,6 +950,40 @@ $("#hlist").addEventListener("click", e => {
   osmMarkers[+b.dataset.h].openPopup();
   document.getElementById("osm").scrollIntoView({block:"nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
 });
+
+
+/* Photos de la maison (annonce HomeExchange de Lucile) */
+const PHOTOS = [
+  ["img/theza-01-jardin.jpg","Le jardin, la piscine et la pergola"],
+  ["img/theza-02-salon.jpg","Le salon et la salle à manger"],
+  ["img/theza-03-cuisine.jpg","La cuisine"],
+  ["img/theza-04-jeux.jpg","La salle de jeux"],
+  ["img/theza-05-jeux-balcon.jpg","La salle de jeux, côté balcon"],
+  ["img/theza-06-chambre-terrasse.jpg","Une chambre avec terrasse"],
+  ["img/theza-07-chambre-jaune.jpg","La chambre à l'armoire jaune"],
+  ["img/theza-08-chambre.jpg","Une chambre"],
+  ["img/theza-09-sdb.jpg","La salle de bain"]
+];
+let lbi = 0;
+function renderGallery(){
+  $("#gallery").innerHTML = PHOTOS.map((p,i) => `<figure><button type="button" data-g="${i}" aria-label="Agrandir : ${esc(p[1])}"><img src="${p[0]}" alt="${esc(p[1])}" loading="${i < 3 ? "eager" : "lazy"}"></button><figcaption>${esc(p[1])}</figcaption></figure>`).join("");
+}
+function lbShow(i){ lbi = (i + PHOTOS.length) % PHOTOS.length; $("#lbimg").src = PHOTOS[lbi][0]; $("#lbimg").alt = PHOTOS[lbi][1]; $("#lbcap").textContent = PHOTOS[lbi][1]; $("#lightbox").hidden = false; $("#lbclose").focus(); }
+function lbHide(){ $("#lightbox").hidden = true; }
+$("#gallery").addEventListener("click", e => { const b = e.target.closest("[data-g]"); if (b) lbShow(+b.dataset.g); });
+$("#lbclose").addEventListener("click", lbHide);
+$("#lbprev").addEventListener("click", () => lbShow(lbi - 1));
+$("#lbnext").addEventListener("click", () => lbShow(lbi + 1));
+$("#lightbox").addEventListener("click", e => { if (e.target.id === "lightbox") lbHide(); });
+document.addEventListener("keydown", e => { if ($("#lightbox").hidden) return; if (e.key === "Escape") lbHide(); else if (e.key === "ArrowLeft") lbShow(lbi - 1); else if (e.key === "ArrowRight") lbShow(lbi + 1); });
+$("#copyaddr").addEventListener("click", async () => {
+  const t = $("#addr").textContent, btn = $("#copyaddr");
+  try { await navigator.clipboard.writeText(t); btn.textContent = "Copiée"; }
+  catch(e){ const r = document.createRange(); r.selectNodeContents($("#addr")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); btn.textContent = "Sélectionnée"; }
+  setTimeout(() => { btn.textContent = "Copier"; }, 2000);
+});
+/* La carte OpenStreetMap ne se dimensionne correctement qu'une fois l'historique ouvert */
+$("#hist").addEventListener("toggle", () => { if (!$("#hist").open) return; if (!osm) initOSM(); else { osm.invalidateSize(); fitZone(osmZone); } });
 
 /* Feux d'artifice du bandeau */
 (function(){
@@ -920,5 +1014,5 @@ $("#hlist").addEventListener("click", e => {
   requestAnimationFrame(frame);
 })();
 
-renderTrack(); initOSM(); renderDays(); renderFest(); renderTrips(); drawMap(); renderLegend(); showPlace("maison"); renderPack(); renderResa(); liveWeather();
+renderGallery(); renderTrack(); renderDays(); renderFest(); renderTrips(); drawMap(); renderLegend(); showPlace("maison"); renderPack(); renderResa(); liveWeather();
 </script>
