@@ -475,7 +475,7 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
     <div class="panel">
       <h3>Trajet</h3>
       <ul>
-        <li>Toulouse – Théza : environ 210 km, 2 h 15 par l'A61 puis l'A9, sortie Perpignan-Sud.</li>
+        <li>Toulouse – Théza : environ 210 km, 2 h 15 par l'A61 puis l'A9, sortie Perpignan-Sud. Le 28, arrêt à Sigean (sortie 39).</li>
         <li>Pauline et Jules arrivent le 30 : seconde voiture, ou train jusqu'à Perpignan, à 15 minutes de la maison.</li>
         <li>Sortie Perpignan-Sud, puis la voie rapide vers Argelès.</li>
         <li>Théza – Argelès : 15 minutes ; prévoir un conducteur pour le retour du réveillon.</li>
@@ -512,6 +512,7 @@ footer ol{padding-left:18px; margin:6px 0 0; display:grid; gap:2px}
     <li><a href="https://ville-argelessurmer.fr/system/files_force/documents/depliant_fetes_inouies_2025.pdf?download=1" target="_blank" rel="noopener">Ville d'Argelès-sur-Mer, dépliant des Fêtes inouïes 2025-2026</a></li>
     <li><a href="https://www.pariszigzag.fr/paris-au-quotidien/bain-du-nouvel-an-argeles/" target="_blank" rel="noopener">Paris Zigzag, le bain du Nouvel An à Argelès</a></li>
     <li><a href="https://www.routard.com/fr/guide/france/languedoc-roussillon/pyrenees-orientales/collioure/chateau-royal" target="_blank" rel="noopener">Routard, Château royal de Collioure</a></li>
+    <li><a href="https://www.reserveafricainesigean.fr/en/visit-the-reserve/lumieres-d-afrique/" target="_blank" rel="noopener">Réserve africaine de Sigean, Lumières d'Afrique 2026-2027</a></li>
     <li><a href="https://www.anigaido.com/lieux/parcs-animaliers/reserve-africaine-de-sigean" target="_blank" rel="noopener">Anigaïdo, Réserve africaine de Sigean</a></li>
     <li><a href="https://barcelonaurbana.com/ca/blog/museu-dali-figueres-preus-i-combinada-residents" target="_blank" rel="noopener">Barcelona Urbana, Théâtre-musée Dalí</a></li>
     <li>Annonces et échanges HomeExchange, octobre 2026</li>
@@ -545,14 +546,15 @@ const PLACES = {
 };
 
 const DAYS = [
-  {d:"2026-12-28", title:"Arrivée à Théza", places:["maison"],
-   slots:[["Après-midi","Route depuis Toulouse, environ 2 h 15. Installation chez Lucile."],["Fin de journée","Premier tour du village : le parc et le skate-park à 3 minutes."],["Soir","Petit marché de producteurs du lundi soir, puis dîner à la maison."]]},
+  {d:"2026-12-28", title:"Safari à Sigean, en route vers Théza", places:["maison"],
+   slots:[["8h30","Départ de Toulouse avec Hélia et Noé. Environ 1 h 45 jusqu'à la Réserve africaine de Sigean, sur l'A9."],["10h30–15h30","Safari en voiture (lions, rhinocéros, girafes), puis le parc à pied avec les ours, les éléphants et les zèbres. Déjeuner sur place."],["16h","Route vers Théza, environ 45 minutes. Installation chez Lucile."],["Soir","Petit marché de producteurs du lundi soir si l'on arrive à temps, puis dîner à la maison."],["Variante","Rester pour les Lumières d'Afrique : lanternes géantes allumées à 17h30, comprises dans le billet. Arrivée à Théza vers 20h, à caler avec Lucile."]],
+   warn:"Billets en ligne obligatoires, avec un créneau d'entrée entre 10h et 16h. Toute sortie du parc est définitive."},
   {d:"2026-12-29", title:"À trois, entre plage et poneys", places:["larrieu","esplanade","maison"],
    slots:[["Matin","Balade dans les dunes et les lagunes du Mas Larrieu, ou vélo sur les pistes cyclables vers la mer."],["15h–19h","Animations enfants sur l'esplanade d'Argelès : balades à poney, kart à voile, jeux d'arcade."],["16h30","Coucher du soleil sur la plage."],["20h","Concert gratuit sur l'esplanade, si l'énergie suit."]]},
   {d:"2026-12-30", title:"Pauline et Jules nous rejoignent", places:["maison","elne","esplanade"],
    slots:[["Matin","Marché du mercredi à Théza, puis courses du réveillon à Elne : les magasins ferment tôt le 31."],["Après-midi","Arrivée de Pauline et Jules, installation."],["15h–17h","Initiation au rugby pour les enfants sur l'esplanade d'Argelès."],["20h","Premier concert à cinq, ou soirée jeux à la maison."]]},
   {d:"2026-12-31", star:true, title:"Saint-Sylvestre", places:["esplanade","figueres"],
-   slots:[["Journée","Au choix : Réserve africaine de Sigean (safari en voiture) ou musée Dalí à Figueres. Ou une journée calme au village."],["Fin d'après-midi","Préparation du dîner, apéritif à la maison."],["21h","Réveillon sur l'esplanade d'Argelès : DJ et piste de danse en bord de mer."],["Minuit","Feu d'artifice au-dessus de la mer."]],
+   slots:[["Journée","Au choix : musée Dalí à Figueres, Perpignan et le Castillet, ou une journée calme au village."],["Fin d'après-midi","Préparation du dîner, apéritif à la maison."],["21h","Réveillon sur l'esplanade d'Argelès : DJ et piste de danse en bord de mer."],["Minuit","Feu d'artifice au-dessus de la mer."]],
    warn:"Théza est à 15 minutes d'Argelès : prévoir un conducteur pour le retour après minuit. Le Château royal de Collioure est souvent fermé le 31."},
   {d:"2027-01-01", star:true, title:"Premier plouf de l'année", places:["esplanade","larrieu"],
    slots:[["10h30","Bain du Nouvel An à Argelès : les courageux à l'eau, les autres en supporters."],["12h","Concert électro lounge sur la plage, chocolat chaud."],["Après-midi","Grasse matinée rattrapée, jeux dans la salle de jeux, balade au bord de la mer."]],
@@ -619,9 +621,9 @@ const TRIPS = [
   {name:"Sentier du littoral", place:"racou", dist:"Départ à 18 km · 2 h à pied", tags:["famille","nature","gratuit"],
    txt:"Du Racou à Collioure par les criques et les falaises, environ 6 km. Retour en train ou en bus. Bien abrité les jours de tramontane.",
    hours:"Libre accès.", closed:""},
-  {name:"Réserve africaine de Sigean", place:null, dist:"60 km · 45 min", tags:["petits","animaux","journée"],
-   txt:"Safari en voiture puis parc à pied : lions, girafes, rhinocéros, éléphants. Une valeur sûre pour Hélia et Noé.",
-   hours:"Hiver : safari 10h–16h, parc à pied jusqu'à 17h. Adulte 34 €, gratuit avant 4 ans.", closed:"Secteur venté en hiver : regarder la météo avant de partir."},
+  {name:"Réserve africaine de Sigean", place:null, dist:"Lundi 28 · sur la route", tags:["petits","animaux","journée"],
+   txt:"Safari en voiture puis parc à pied : lions, girafes, rhinocéros, éléphants. Sur l'A9 entre Narbonne et Perpignan, à 1 h 45 de Toulouse et 45 minutes de Théza.",
+   hours:"Entrée de 10h à 16h selon le créneau réservé. Adulte 34 €, enfant de 4 à 14 ans 24 €, Lumières d'Afrique comprises (lanternes de 17h30 à 20h pendant les vacances scolaires).", closed:"Prévue le 28 décembre, sur la route depuis Toulouse. Billets en ligne obligatoires."},
   {name:"Théâtre-musée Dalí", place:"figueres", dist:"55 km · 45 min", tags:["ados","culture","espagne","pluie"],
    txt:"Le musée conçu par Dalí lui-même : voiture sous la pluie, salle Mae West, coupole géodésique. Très visuel, il plaît autant aux enfants qu'à Jules.",
    hours:"Entrée en ligne dès 18,50 €. Gratuit avant 8 ans.", closed:"Fermé les 25 décembre et 1er janvier."},
@@ -667,7 +669,7 @@ const RESA = [
   {id:"trajet", t:"Trajet de Pauline et Jules le 30", s:"Seconde voiture, ou train jusqu'à Perpignan", def:"afaire"},
   {id:"autres2", t:"Prévenir les autres hôtes", s:"Auriane, Marjorie, Katla, Marine et Rémy, Sabrina et Julien, Nicolas, Florian et Anne-Sophie", def:"afaire"},
   {id:"fetes", t:"Programme officiel des fêtes 2026-2027", s:"À consulter début décembre sur le site de la ville", def:"afaire"},
-  {id:"sigean", t:"Billets Réserve de Sigean", s:"Achat en ligne", def:"optionnel"},
+  {id:"sigean2", t:"Billets Réserve de Sigean, lundi 28", s:"Achat en ligne obligatoire, créneau d'entrée entre 10h et 16h ; 1 adulte et 2 enfants", def:"afaire"},
   {id:"dali", t:"Billets musée Dalí", s:"Créneau horaire en ligne", def:"optionnel"},
   {id:"courses", t:"Courses du réveillon", s:"Le 30, les magasins ferment tôt le 31", def:"afaire"}
 ];
@@ -801,7 +803,7 @@ function drawMap(){
   if (view === "wide") {
     h += T("ctry",2.78,42.505,"FRANCE") + T("ctry",2.78,42.405,"ESPAGNE") + T("sea",3.20,42.62,"Méditerranée")
        + T("small",2.95,42.47,"Massif des Albères",0,16) + T("small",2.86,42.535,"le Tech",0,14)
-       + T("small",2.72,42.75,"↑ Sigean 70 km · Toulouse 230 km",0,14);
+       + T("small",2.72,42.75,"↑ Sigean 60 km · Toulouse 210 km",0,14);
   } else {
     h += T("ctry",2.94,42.455,"ESPAGNE",0,0) + T("sea",3.09,42.60,"Méditerranée")
        + T("small",2.96,42.486,"Massif des Albères",0,-2) + T("small",2.95,42.566,"le Tech",0,-6)
